@@ -17,14 +17,10 @@ session_start();
 
 <body>
     <div id="container">
-        <header>
-            <div class="logo">
-                <img src="./asset/LOGO.jpg" alt="logo du site">
-            </div>
-            <div class="title">
-                <h1>Médiathèque du Sud</h1>
-            </div>
-        </header>
+        <?php
+        require './composants/header.php';
+        ?>
+
         <main>
             <div class="connexion">
                 <h2>CONNEXION</h2>
@@ -41,9 +37,10 @@ session_start();
                 </form>
             </div>
         </main>
-        <footer>
-            <a href="" class="numeros">Numéros Utiles</a>
-        </footer>
+
+        <?php
+        require './composants/footer.php';
+        ?>
     </div>
 
     <script src="./javascript/index.js"></script>
