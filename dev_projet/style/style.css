@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+#container {
+  font-family: "Roboto", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: center / cover no-repeat
+    url("https://www.justgeek.fr/wp-content/uploads/2021/06/windows-11-fond-ecran-wallpaper-3-scaled.jpg");
+}
+
+/* GENERAL STYLES */
+header,
+main,
+footer {
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+}
+header,
+footer {
+  height: 20vh;
+  background-color: rgba(98, 107, 115, 0.65);
+}
+
+/* ----------------------CONNEXION PAGE BIBLIOTHECAIRE------------------ */
+
+/* HEADER */
+header {
+  align-items: center;
+}
+header img {
+  border-radius: 20px;
+  width: 200px;
+  min-width: 150px;
+  height: 150px;
+  min-height: 120px;
+  opacity: 0.8;
+}
+header h1 {
+  font-size: 2rem;
+  margin: 0 20px;
+}
+
+/* MAIN */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .connexion {
+  background-color: rgba(128, 155, 209, 0.75);
+  border-radius: 35px;
+  width: 30%;
+  min-width: 350px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main .connexion form {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+main .input_group {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+main .input_group input {
+  font-weight: 600;
+  border-radius: 5px;
+  border-style: none;
+  padding: 10px;
+}
+main button {
+  cursor: pointer;
+  padding: 20px 0;
+  margin-top: 10px;
+  width: 250px;
+  border-radius: 10px;
+  border-style: none;
+  transition: 0.3s ease-in;
+}
+main button:hover {
+  /* font-size: 1.2rem; */
+  background-color: rgb(231, 176, 176);
+  font-size: 1.2rem;
+  font-weight: 700;
+  transform: scale(1.1);
+}
+
+/* FOOTER */
+footer {
+  justify-content: flex-end;
+  align-items: center;
+}
+footer a {
+  margin-right: 50px;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+footer a:visited {
+  color: rgb(189, 191, 190);
+}
+
+/* ----------------------FIN CONNEXION PAGE BIBLIOTHECAIRE------------------ */
+/* ----------------------HOME PAGE BIBLIOTHECAIRE------------------ */
