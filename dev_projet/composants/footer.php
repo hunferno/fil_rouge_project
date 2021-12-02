@@ -1,3 +1,3 @@
 <footer>
-    <a href="" class="numeros">Numéros Utiles</a>
+    <a href="../pages/admin_dashboard.php" class="numeros">Numéros Utiles</a>
 </footer>

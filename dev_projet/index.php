@@ -27,11 +27,11 @@ session_start();
                 <form action="" method="post">
                     <div class="input_group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email">
+                        <input type="email" name="email" id="email" placeholder="anonymous@email.com">
                     </div>
                     <div class="input_group">
                         <label for="password">Mot de passe</label>
-                        <input type="password" name="password" id="password">
+                        <input type="password" name="password" id="password" placeholder="*******">
                     </div>
                     <button type="submit">Se connecter</button>
                 </form>

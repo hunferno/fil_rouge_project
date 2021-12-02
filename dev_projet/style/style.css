@@ -36,6 +36,11 @@ footer {
 /* HEADER */
 header {
   align-items: center;
+  justify-content: space-between;
+}
+header .logo {
+  display: flex;
+  align-items: center;
 }
 header img {
   border-radius: 20px;
@@ -56,16 +61,19 @@ main {
   justify-content: center;
   align-items: center;
 }
+main .connexion,
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 main .connexion {
   background-color: rgba(128, 155, 209, 0.75);
   border-radius: 35px;
   width: 30%;
   min-width: 350px;
   height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 main .connexion form {
   width: 65%;
@@ -118,6 +126,40 @@ footer a:visited {
 }
 
 /* ----------------------FIN CONNEXION PAGE BIBLIOTHECAIRE------------------ */
-/* ----------------------HOME PAGE BIBLIOTHECAIRE------------------ */
-
-/* ----------------------FIN HOME PAGE BIBLIOTHECAIRE------------------ */
+/* ----------------------DASHBOARD BIBLIOTHECAIRE------------------ */
+/* HEADER */
+header .profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .profile i {
+  color: burlywood;
+  margin-left: 18px;
+}
+/* MAIN */
+main .menu {
+  flex-direction: row;
+}
+.dashBtn {
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashBtn a {
+  color: black;
+  text-decoration: none;
+  padding: 35px 50px;
+  margin: 0 20px;
+  border-radius: 20px;
+  background-color: rgb(209, 230, 216);
+  transition: 0.2s ease-in;
+}
+.dashBtn a:hover {
+  color: rgb(90, 36, 57);
+  transform: scale(1.15);
+  font-weight: 700;
+  background-color: rgb(158, 201, 171);
+}
+/* ----------------------FIN DASHBOARD BIBLIOTHECAIRE------------------ */
