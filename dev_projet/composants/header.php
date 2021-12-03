@@ -4,9 +4,17 @@
         <h1>Médiathèque du Sud</h1>
     </div>
 
-    <div class="profile">
-        <h3>Bienvenue George</h3>
-        <a href=""><i class="fas fa-sign-out-alt fa-2x"></i></a>
-    </div>
+    <?php
+    if (isset($_SESSION['userFirstName'])) {
+        $userFirstName = $_SESSION["userFirstName"];
+        $userLastName = $_SESSION["userLastName"];
+        echo "
+        <div class='profile'>
+        <h3>Bienvenue $userFirstName $userLastName</h3>
+        <a href='../clientActions/deconnect.php'><i class='fas fa-sign-out-alt fa-2x'></i></a>
+        </div>
+        ";
+    }
+    ?>
 
 </header>

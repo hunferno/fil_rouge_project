@@ -1,5 +1,6 @@
 <?php
 session_start();
+$nomPage = 'admin_dashboard';
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +19,12 @@ session_start();
 </head>
 
 <body>
+    <?php
+    // REDIRECTION SI SESSION N'EXISTE PAS
+    if (!isset($_SESSION['userFirstName'])) {
+        header('Location:/index.php');
+    }
+    ?>
     <div id="container">
         <?php
         require '../composants/header.php';
