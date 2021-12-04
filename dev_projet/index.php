@@ -37,7 +37,7 @@ $email = ""
             <!-- Si METHODE POST -->
             <?php
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+                //RECUPERATION DES DONNEES DU FORMULAIRE
                 $client = [
                     'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
                     'password' => filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS)
@@ -58,24 +58,35 @@ $email = ""
                 if ($dbResponse->rowCount()) {
                     $email = $client['email'];
                     $dataFromResponse = $dbResponse->fetch();
-                    //VERIFICATION DU MDP
-                    $passwordVerify = password_verify($client['password'], $dataFromResponse['password_user']);
-                    //SI MDP BON
-                    if ($passwordVerify) {
-                        $_SESSION["userFirstName"] = $dataFromResponse["prenom_user"];
-                        $_SESSION["userLastName"] = $dataFromResponse["nom_user"];
-                        header('Location:/pages/admin_dashboard.php');
-                        exit();
+
+                    // var_dump($dataFromResponse['id_categorie_user']);
+                    // die();
+
+                    //VERIFICATION SI USER EST ADMIN
+                    if ($dataFromResponse['id_categorie_user'] === "1") {
+                        //VERIFICATION DU MDP
+                        $passwordVerify = password_verify($client['password'], $dataFromResponse['password_user']);
+                        //SI MDP BON
+                        if ($passwordVerify) {
+                            $_SESSION["userFirstName"] = $dataFromResponse["prenom_user"];
+                            $_SESSION["userLastName"] = $dataFromResponse["nom_user"];
+                            header('Location:/pages/admin_dashboard.php');
+                            exit();
+                        } else {
+                            //Boite alert
+                            echo '<div class="alert alert-danger" role="alert">
+                                    Mot de passe incorrect
+                                </div>';
+                        }
                     } else {
-                        //Boite alert
-                        echo '<div class="alert alert-danger" role="alert">
-                                Mot de passe incorrect
-                            </div>';
+                        //PAGE INFORMATION DE REDIRECTION VERS LE SITE UTILISATEUR
+                        header('Location:/pages/redirect_userWebsite.php');
                     }
                 } else {
+                    //Boite alert
                     echo '<div class="alert alert-danger" role="alert">
-                    Email inexistant
-                    </div>';
+                        Email inexistant
+                        </div>';
                 }
             }
             ?>

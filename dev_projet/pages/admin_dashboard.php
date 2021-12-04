@@ -14,7 +14,7 @@ $nomPage = 'admin_dashboard';
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
-    <link rel="icon" href="./asset/favicon.ico" />
+    <link rel="icon" href="../asset/favicon.ico" />
     <link rel="stylesheet" href="../style/style.css">
 </head>
 
@@ -35,9 +35,9 @@ $nomPage = 'admin_dashboard';
                 <div class="dashBtn gest_livres">
                     <a href="">GESTION DES LIVRES</a>
                 </div>
-                <div class="dashBtn creat_abonne">
+                <!-- <div class="dashBtn creat_abonne">
                     <a href="">CREATION D'UN ABONNÉ</a>
-                </div>
+                </div> -->
                 <div class="dashBtn gest_abonnes">
                     <a href="">GESTION DES ABONNÉS</a>
                 </div>

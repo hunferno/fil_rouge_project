@@ -185,6 +185,9 @@ main .numeros {
   grid-template-columns: auto auto;
   grid-template-rows: auto;
   overflow: hidden;
+}
+main .numeros,
+.redirection {
   width: 75%;
   height: 350px;
   background-color: rgba(128, 155, 209, 0.75);
@@ -216,3 +219,24 @@ main .numeros .sectionPart {
   font-weight: 800;
 }
 /* ----------------------FIN PAGE NUMEROS UTILES------------------ */
+/* ----------------------PAGE REDIRECTION SI PAS ADMIN------------------ */
+
+/* ----------------------FIN PAGE REDIRECTION SI PAS ADMIN------------------ */
+.redirection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+}
+.redirection p {
+  margin: 35px 0;
+  text-align: center;
+  line-height: 2rem !important;
+  font-weight: 700;
+  font-size: large;
+}
+.redirection p a {
+  font-size: 1.35rem;
+  color: rgb(105, 39, 63);
+  text-decoration: none;
+}
