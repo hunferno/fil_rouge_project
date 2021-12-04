@@ -6,7 +6,7 @@
         <a href="/pages/admin_dashboard/ajouter_livre.php">
             <li><i class="fas fa-book-medical"></i> Ajouter un livre</li>
         </a>
-        <a href="">
+        <a href="/pages/admin_dashboard/tous_les_livres.php">
             <li><i class="fas fa-swatchbook"></i> Tous les livres</li>
         </a>
         <a href="">

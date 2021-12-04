@@ -7,8 +7,6 @@ if (!isset($_SESSION['userFirstName'])) {
 }
 
 $nomPage = 'ajouter_livre';
-$email = $_SESSION['userEmail'];
-$telephone = $_SESSION['userPhone'];
 
 ?>
 
@@ -19,7 +17,7 @@ $telephone = $_SESSION['userPhone'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Ajouter un livre</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -47,7 +45,7 @@ $telephone = $_SESSION['userPhone'];
         //CONNECTION BD AVEC PDO
         $dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-        $dbRequest = 'INSERT INTO livre VALUES ("NULLARD", :titre, :disponible, :date_parution, :id_theme, :id_auteur, :id_editeur)';
+        $dbRequest = 'INSERT INTO livre VALUES (:id_livre, :titre, :disponible, :date_parution, :id_theme, :id_auteur, :id_editeur)';
         //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
         $dbResponse = $dbConnect->prepare($dbRequest);
 
@@ -57,7 +55,16 @@ $telephone = $_SESSION['userPhone'];
         //TRANSFORMER LA CHECKBOX EN BOOLEAN
         $checkbox = $livre['disponible'] ? true : false;
 
+        //FORMATTER ID LIVRE -> TITRE,THEME,AUTEUR,EDITEUR&DATE
+        //1-ON SUPPR LES ESPACES ET ON PREND LES 3 PREMIERS CARACTERES
+        $formatTitre = substr(str_replace(' ', '', $livre['titre']), 0, 3);
+        $formatDate = substr(str_replace(' ', '', $livre['date_parution']), 0, 3);
+
+        //2-ON RECUPERE LA CONCATENATION DE TOUTES LES CHAINES
+        $uniqueIdLivre = strtoupper($formatTitre . $livre['id_theme'] . $livre['id_auteur'] . $livre['id_editeur'] . $formatDate);
+
         //COMPLETER LES DONNEES MANQUANTES A PARTIR DE LA REPONSE AVEC LE BINDPARAM
+        $dbResponse->bindParam(':id_livre', $uniqueIdLivre);
         $dbResponse->bindParam(':titre', $titre);
         $dbResponse->bindParam(':disponible', $checkbox);
         $dbResponse->bindParam(':date_parution', $livre['date_parution']);
