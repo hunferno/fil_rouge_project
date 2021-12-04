@@ -1,6 +1,6 @@
 <header>
     <div class="logo">
-        <a href="/index.php"><img src="../asset/LOGO.jpg" alt="logo du site"></a>
+        <a href="/index.php"><img src="/asset/LOGO.jpg" alt="logo du site"></a>
         <h1>Médiathèque du Sud</h1>
     </div>
 
@@ -11,7 +11,7 @@
         echo "
         <div class='profile'>
         <h3>Bienvenue $userFirstName $userLastName</h3>
-        <a href='../clientActions/deconnect.php'><i class='fas fa-sign-out-alt fa-2x'></i></a>
+        <a href='/clientActions/deconnect.php'><i class='fas fa-sign-out-alt fa-2x'></i></a>
         </div>
         ";
     }

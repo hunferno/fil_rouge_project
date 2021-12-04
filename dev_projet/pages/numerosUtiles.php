@@ -15,6 +15,7 @@ $nomPage = 'numerosUtiles';
 
     <link rel="icon" href="../asset/favicon.ico" />
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/numeros_utiles_style.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@ $nomPage = 'numerosUtiles';
         require '../composants/header.php';
         ?>
 
-        <main>
+        <main id="main_numeros">
             <div class="numeros">
                 <div class="sectionPart">
                     <h3>Administration</h3>

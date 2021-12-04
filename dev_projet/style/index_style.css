@@ -1,0 +1,48 @@
+main .connexion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main .connexion {
+  background-color: rgba(128, 155, 209, 0.75);
+  border-radius: 35px;
+  width: 30%;
+  min-width: 350px;
+  height: 300px;
+}
+main .connexion form {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+main .input_group {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+main .input_group #email,
+#password {
+  font-weight: 600;
+  border-radius: 5px;
+  border-style: none;
+  padding: 8px;
+}
+main #submitBtn {
+  cursor: pointer;
+  padding: 15px 0;
+  margin-top: 10px;
+  width: 200px;
+  border-radius: 10px;
+  border-style: none;
+  transition: 0.3s ease-in;
+}
+main #submitBtn:hover {
+  /* font-size: 1.2rem; */
+  background-color: rgb(231, 176, 176);
+  font-weight: 700;
+  transform: scale(1.1);
+}

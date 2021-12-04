@@ -9,6 +9,7 @@
 
     <link rel="icon" href="../asset/favicon.ico" />
     <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/redirect_website_style.css">
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         require '../composants/header.php';
         ?>
 
-        <main>
+        <main id="main_redirect">
             <div class="redirection">
                 <h2>REDIRECTION</h2>
                 <p>

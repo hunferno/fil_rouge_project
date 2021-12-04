@@ -1,0 +1,18 @@
+.redirection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+}
+.redirection p {
+  margin: 35px 0;
+  text-align: center;
+  line-height: 2rem !important;
+  font-weight: 700;
+  font-size: large;
+}
+.redirection p a {
+  font-size: 1.35rem;
+  color: rgb(105, 39, 63);
+  text-decoration: none;
+}

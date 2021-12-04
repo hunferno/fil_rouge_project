@@ -1,3 +1,5 @@
+/* -------------STYLES GENERAUX--------------- */
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 * {
@@ -7,41 +9,32 @@
   list-style-type: none;
   line-height: normal !important;
 }
-#container {
+
+/* BODY */
+body {
   font-family: "Roboto", sans-serif !important;
+  background: center / cover no-repeat
+    url("https://www.justgeek.fr/wp-content/uploads/2021/06/windows-11-fond-ecran-wallpaper-3-scaled.jpg");
+}
+
+/* MAIN */
+#main_index,
+#main_numeros,
+#main_redirect {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: center / cover no-repeat
-    url("https://www.justgeek.fr/wp-content/uploads/2021/06/windows-11-fond-ecran-wallpaper-3-scaled.jpg");
 }
-
-/* BOOTSTRAP */
-main .alert {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30vw;
-  height: 25px;
-}
-
-/* GENERAL STYLES */
-header,
-main,
-footer {
-  display: flex;
-  width: 100%;
-  padding: 0 20px;
-}
-header,
-footer {
-  height: 20vh;
-  background-color: rgba(98, 107, 115, 0.65);
-}
-
-/* ----------------------PAGE DE CONNEXION BIBLIOTHECAIRE------------------ */
 
 /* HEADER */
 header {
@@ -57,7 +50,7 @@ header img {
   width: 12vw;
   height: 17vh;
   /* min-width: 150px;
-  min-height: 120px; */
+    min-height: 120px; */
   opacity: 0.8;
 }
 header h1 {
@@ -66,62 +59,26 @@ header h1 {
   margin: 0 20px;
 }
 
-/* MAIN */
-main {
-  margin: 10px 0;
+/* BOOTSTRAP */
+main .alert {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 30vw;
+  height: 25px;
 }
-main .connexion,
-.menu {
+
+header,
+main,
+footer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-main .connexion {
-  background-color: rgba(128, 155, 209, 0.75);
-  border-radius: 35px;
-  width: 30%;
-  min-width: 350px;
-  height: 300px;
-}
-main .connexion form {
-  width: 65%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-}
-main .input_group {
   width: 100%;
-  margin: 10px 0;
-  display: flex;
-  flex-direction: column;
+  padding: 0 20px;
 }
-main .input_group #email,
-#password {
-  font-weight: 600;
-  border-radius: 5px;
-  border-style: none;
-  padding: 8px;
-}
-main #submitBtn {
-  cursor: pointer;
-  padding: 15px 0;
-  margin-top: 10px;
-  width: 200px;
-  border-radius: 10px;
-  border-style: none;
-  transition: 0.3s ease-in;
-}
-main #submitBtn:hover {
-  /* font-size: 1.2rem; */
-  background-color: rgb(231, 176, 176);
-  font-weight: 700;
-  transform: scale(1.1);
+header,
+footer {
+  height: 20vh;
+  background-color: rgba(98, 107, 115, 0.65);
 }
 
 /* FOOTER */
@@ -137,9 +94,6 @@ footer a {
 footer a:visited {
   color: rgb(189, 191, 190);
 }
-
-/* ----------------------FIN PAGE CONNEXION BIBLIOTHECAIRE------------------ */
-/* ----------------------DASHBOARD BIBLIOTHECAIRE------------------ */
 /* HEADER */
 header .profile {
   display: flex;
@@ -153,90 +107,5 @@ header .profile i {
   color: burlywood;
   margin-left: 18px;
 }
-/* MAIN */
-main .menu {
-  flex-direction: row;
-}
-.dashBtn {
-  margin: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.dashBtn a {
-  color: black;
-  text-decoration: none;
-  padding: 35px 50px;
-  margin: 0 20px;
-  border-radius: 20px;
-  background-color: rgb(209, 230, 216);
-  transition: 0.2s ease-in;
-}
-.dashBtn a:hover {
-  color: rgb(90, 36, 57);
-  transform: scale(1.15);
-  font-weight: 700;
-  background-color: rgb(158, 201, 171);
-}
-/* ----------------------FIN DASHBOARD BIBLIOTHECAIRE------------------ */
-/* ----------------------PAGE NUMEROS UTILES------------------ */
-main .numeros {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
-  overflow: hidden;
-}
-main .numeros,
-.redirection {
-  width: 75%;
-  height: 350px;
-  background-color: rgba(128, 155, 209, 0.75);
-  border-radius: 45px;
-}
-main .numeros .sectionPart:nth-child(1) {
-  border-right: 2px dashed black;
-}
-main .numeros .sectionPart {
-  /* width: 50px; */
-  /* height: 50px; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 25px 0;
-}
-.administration,
-.urgences {
-  margin: 20px 0;
-}
-.administration p,
-.urgences p {
-  margin: 25px 0;
-}
-.administration p span:nth-child(2),
-.urgences p span:nth-child(2) {
-  font-size: large;
-  font-weight: 800;
-}
-/* ----------------------FIN PAGE NUMEROS UTILES------------------ */
-/* ----------------------PAGE REDIRECTION SI PAS ADMIN------------------ */
 
-/* ----------------------FIN PAGE REDIRECTION SI PAS ADMIN------------------ */
-.redirection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px 0;
-}
-.redirection p {
-  margin: 35px 0;
-  text-align: center;
-  line-height: 2rem !important;
-  font-weight: 700;
-  font-size: large;
-}
-.redirection p a {
-  font-size: 1.35rem;
-  color: rgb(105, 39, 63);
-  text-decoration: none;
-}
+/* FIN STYLES GENERAUX */

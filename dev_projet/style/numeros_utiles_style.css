@@ -1,0 +1,39 @@
+main .numeros {
+  align-self: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  overflow: hidden;
+}
+main .numeros,
+.redirection {
+  width: 75%;
+  height: 350px;
+  background-color: rgba(128, 155, 209, 0.75);
+  border-radius: 45px;
+}
+main .numeros .sectionPart:nth-child(1) {
+  border-right: 2px dashed black;
+}
+main .numeros .sectionPart {
+  /* width: 50px; */
+  /* height: 50px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 25px 0;
+}
+.administration,
+.urgences {
+  margin: 20px 0;
+}
+.administration p,
+.urgences p {
+  margin: 25px 0;
+}
+.administration p span:nth-child(2),
+.urgences p span:nth-child(2) {
+  font-size: large;
+  font-weight: 800;
+}

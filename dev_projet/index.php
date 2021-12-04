@@ -16,6 +16,7 @@ $email = ""
 
     <link rel="icon" href="./asset/favicon.ico" />
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/index_style.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@ $email = ""
     <!-- REDIRECTION SI SESSION EXISTE -->
     <?php
     if (isset($_SESSION['userFirstName'])) {
-        header('Location:/pages/admin_dashboard.php');
+        header('Location:/pages/admin_dashboard/accueil.php');
     }
     ?>
 
@@ -32,7 +33,7 @@ $email = ""
         require './composants/header.php';
         ?>
 
-        <main>
+        <main id="main_index">
 
             <!-- Si METHODE POST -->
             <?php
@@ -70,7 +71,9 @@ $email = ""
                         if ($passwordVerify) {
                             $_SESSION["userFirstName"] = $dataFromResponse["prenom_user"];
                             $_SESSION["userLastName"] = $dataFromResponse["nom_user"];
-                            header('Location:/pages/admin_dashboard.php');
+                            $_SESSION["userPhone"] = $dataFromResponse["telephone_user"];
+                            $_SESSION["userEmail"] = $dataFromResponse["email_user"];
+                            header('Location:/pages/admin_dashboard/accueil.php');
                             exit();
                         } else {
                             //Boite alert
