@@ -1,13 +1,20 @@
 <?php
 session_start();
+$nomPage = 'modifier_livre';
 
 // REDIRECTION SI SESSION N'EXISTE PAS
 if (!isset($_SESSION['userFirstName'])) {
-    header('Location:/index.php');
+    header('Location:/pages/admin_dashboard/accueil.php');
+}
+//REDIRECTION SI PAS DE QUERY STRING
+if (!isset($_GET['id'])) {
+    header('Location:/pages/admin_dashboard/accueil.php');
 }
 
-$nomPage = 'ajouter_livre';
-
+// TITRE VENANT DU GET (link)
+$titre_livre = $_GET['titre'];
+//ID VENANT DU GET (link)
+$id_livre = $_GET['id'];
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +24,7 @@ $nomPage = 'ajouter_livre';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un livre</title>
+    <title>Modifier un livre</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -45,7 +52,19 @@ $nomPage = 'ajouter_livre';
         //CONNECTION BD AVEC PDO
         $dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-        $dbRequest = 'INSERT INTO livre VALUES (:id_livre, :titre, :disponible, :date_parution, :id_theme, :id_auteur, :id_editeur)';
+        $dbRequest = 'UPDATE livre 
+        SET id_livre=:id_livre,
+        titre_livre=:titre, 
+        disponibilite_livre=:disponible, 
+        date_parution_livre=:date_parution, 
+        id_theme=:id_theme, 
+        id_auteur=:id_auteur, 
+        id_editeur=:id_editeur 
+        WHERE id_livre=\'' . $id_livre . '\';';
+
+        // var_dump($dbRequest);
+        // die();
+
         //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
         $dbResponse = $dbConnect->prepare($dbRequest);
 
@@ -73,6 +92,10 @@ $nomPage = 'ajouter_livre';
         $dbResponse->bindParam(':id_editeur', $livre['id_editeur']);
         //EXECUTER L'INSTRUCTION FINALE
         $dbResponse->execute();
+
+        //REDIRECTION VERS TOUS LES LIVRES
+        header('Location:/pages/admin_dashboard/tous_les_livres.php');
+        exit();
     }
 
     ?>
@@ -89,10 +112,10 @@ $nomPage = 'ajouter_livre';
             ?>
             <section class="dashboard_ajouterLivre">
                 <form action="#" method="post">
-                    <h2>Ajouter un nouveau livre</h2>
+                    <h2>Modifier le livre <em>'<?php echo "$titre_livre" ?>'</em></h2>
                     <div class="mb-3">
                         <!-- <label for="titre" class="form-label">Titre du livre</label> -->
-                        <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre : ex. La fille de papier *">
+                        <input type="text" class="form-control" name="titre" id="titre" value="<?php echo $titre_livre ?>" placeholder="Titre : ex. La fille de papier *">
                     </div>
 
                     <select class="mb-3 form-select" name="theme" required>

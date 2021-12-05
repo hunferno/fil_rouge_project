@@ -75,7 +75,7 @@ $dataFromDB = $dbResponse->fetchAll(PDO::FETCH_ASSOC);
                             <td>$value[nom_auteur]</td>
                             <td>$value[raison_sociale_editeur]</td>
                             <td>$value[disponibilite_livre]</td>
-                            <td><a href=''><i class='far fa-edit'></i></a> 
+                            <td><a href='/pages/admin_dashboard/modifier_livre.php?titre=$value[titre_livre]&id=$value[id_livre]'><i class='far fa-edit'></i></a> 
                             <a href='/pages/traitements/delete.php?id=$value[id_livre]'>
                             <i class='far fa-trash-alt'></i></a></td>
                             </tr>";
