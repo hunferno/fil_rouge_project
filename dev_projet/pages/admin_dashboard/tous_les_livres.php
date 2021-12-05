@@ -1,13 +1,21 @@
 <?php
 session_start();
+$nomPage = 'tous_les_livres';
 
 // REDIRECTION SI SESSION N'EXISTE PAS
 if (!isset($_SESSION['userFirstName'])) {
     header('Location:/index.php');
 }
 
-$nomPage = 'tous_les_livres';
-
+//REQUETE SQL POUR OBTENIR TOUS LES LIVRES
+//CONNECTION BD AVEC PDO
+$dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
+//REQUETE A LA BASE DE DONNÉE SANS VARIABLE
+$dbRequest = 'SELECT * FROM livre INNER JOIN theme ON (livre.id_theme = theme.id_theme) INNER JOIN auteur ON (livre.id_auteur = auteur.id_auteur) INNER JOIN editeur ON (livre.id_editeur=editeur.id_editeur);';
+//REPONSE DE LA BD A PARTIR DE LA CONNECTION
+$dbResponse = $dbConnect->query($dbRequest);
+//AFFICHAGE DU RESULTAT AVEC FETCHALL
+$dataFromDB = $dbResponse->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +48,7 @@ $nomPage = 'tous_les_livres';
             <div class="dashboard_ajouterLivre">
                 <!-- Bar de recherche Bootstrap-->
                 <div class="input-group rounded">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <input type="search" class="form-control rounded" placeholder="Rechercher un livre" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <i class="fas fa-search"></i>
                     </span>
@@ -52,27 +60,24 @@ $nomPage = 'tous_les_livres';
                             <th scope="col">ID Livre</th>
                             <th scope="col">Titre</th>
                             <th scope="col">Auteur</th>
-                            <th scope="col">Maison d'édition</th>
+                            <th scope="col">Éditeur</th>
+                            <th scope="col">Disponible</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        <?php
+                        //FORMATTER LA DISPONIBILITE
+                        foreach ($dataFromDB as $value) {
+                            // echo "$value[id_livre]";
+                            echo "<tr>
+                            <th scope='row'>$value[id_livre]</th>
+                            <td>$value[titre_livre]</td>
+                            <td>$value[nom_auteur]</td>
+                            <td>$value[raison_sociale_editeur]</td>
+                            <td>$value[disponibilite_livre]</td>
+                            </tr>";
+                        };
+                        ?>
                     </tbody>
                 </table>
             </div>

@@ -53,7 +53,7 @@ $nomPage = 'ajouter_livre';
         $titre = trim(strtoupper($livre['titre']));
 
         //TRANSFORMER LA CHECKBOX EN BOOLEAN
-        $checkbox = $livre['disponible'] ? true : false;
+        $checkbox = $livre['disponible'] ? 'Oui' : 'Non';
 
         //FORMATTER ID LIVRE -> TITRE,THEME,AUTEUR,EDITEUR&DATE
         //1-ON SUPPR LES ESPACES ET ON PREND LES 3 PREMIERS CARACTERES
