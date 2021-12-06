@@ -49,7 +49,7 @@ if (isset($_SESSION['userFirstName'])) {
                     $dataFromResponse = userConnection($client);
                     $email = $client['email'];
                     //VERIFICATION SI USER EST ADMIN
-                    if ($dataFromResponse['id_categorie_user'] === "2") {
+                    if ($dataFromResponse['id_categorie_user'] === "1") {
                         //VERIFICATION DU MDP
                         $passwordVerify = password_verify($client['password'], $dataFromResponse['password_user']);
                         //SI MDP BON

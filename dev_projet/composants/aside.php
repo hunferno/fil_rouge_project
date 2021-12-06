@@ -9,7 +9,7 @@
         <a href="/pages/admin_dashboard/tous_les_livres.php">
             <li><i class="fas fa-swatchbook"></i> Tous les livres</li>
         </a>
-        <a href="">
+        <a href="/pages/admin_dashboard/ajouter_user.php">
             <li><i class="fas fa-user-plus"></i> Ajouter un utilisateur</li>
         </a>
         <a href="">

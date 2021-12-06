@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-//OBLIGATOIRE
-require('../../clientActions/dbConnection.php');
-
 // REDIRECTION SI SESSION N'EXISTE PAS
 if (!isset($_SESSION['userFirstName'])) {
     header('Location:/index.php');
@@ -34,6 +31,9 @@ $nomPage = 'ajouter_livre';
     <!-- TRAITEMENT DES DONNEES ENVOYER SI ON VIENT D'UN POST-->
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //OBLIGATOIRE
+        require('../../clientActions/dbConnection.php');
+
         //RECUPERATION DES DONNEES DU FORMULAIRE
         $livre = [
             'titre' => $_POST['titre'],
