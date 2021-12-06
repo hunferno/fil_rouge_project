@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+//OBLIGATOIRE
+require('../../clientActions/dbConnection.php');
+
 // REDIRECTION SI SESSION N'EXISTE PAS
 if (!isset($_SESSION['userFirstName'])) {
     header('Location:/index.php');
@@ -40,41 +43,15 @@ $nomPage = 'ajouter_livre';
             'date_parution' => $_POST['date_parution'],
             'disponible' => $_POST['dispo_livre']
         ];
-        // var_dump($livre, $checkbox);
-        // die();
-        //CONNECTION BD AVEC PDO
-        $dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
-        //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-        $dbRequest = 'INSERT INTO livre VALUES (:id_livre, :titre, :disponible, :date_parution, :id_theme, :id_auteur, :id_editeur)';
-        //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
-        $dbResponse = $dbConnect->prepare($dbRequest);
 
-        //TRANSFORMER LE TITRE EN MAJUSCULE
-        $titre = trim(strtoupper($livre['titre']));
-
-        //TRANSFORMER LA CHECKBOX EN BOOLEAN
-        $checkbox = $livre['disponible'] ? 'Oui' : 'Non';
-
-        //FORMATTER ID LIVRE -> TITRE,THEME,AUTEUR,EDITEUR&DATE
-        //1-ON SUPPR LES ESPACES ET ON PREND LES 3 PREMIERS CARACTERES
-        $formatTitre = substr(str_replace(' ', '', $livre['titre']), 0, 3);
-        $formatDate = substr(str_replace(' ', '', $livre['date_parution']), 0, 3);
-
-        //2-ON RECUPERE LA CONCATENATION DE TOUTES LES CHAINES
-        $uniqueIdLivre = strtoupper($formatTitre . $livre['id_theme'] . $livre['id_auteur'] . $livre['id_editeur'] . $formatDate);
-
-        //COMPLETER LES DONNEES MANQUANTES A PARTIR DE LA REPONSE AVEC LE BINDPARAM
-        $dbResponse->bindParam(':id_livre', $uniqueIdLivre);
-        $dbResponse->bindParam(':titre', $titre);
-        $dbResponse->bindParam(':disponible', $checkbox);
-        $dbResponse->bindParam(':date_parution', $livre['date_parution']);
-        $dbResponse->bindParam(':id_theme', $livre['id_theme']);
-        $dbResponse->bindParam(':id_auteur', $livre['id_auteur']);
-        $dbResponse->bindParam(':id_editeur', $livre['id_editeur']);
-        //EXECUTER L'INSTRUCTION FINALE
-        $dbResponse->execute();
+        try {
+            //APPEL DE LA FONCTION ajouterLivre
+            ajouterLivre($livre);
+        } catch (Exception $erreur) {
+            var_dump($error->getMessage());
+            exit();
+        }
     }
-
     ?>
     <!-- FIN TRAITEMENT DES DONNEES ENVOYER -->
 
@@ -91,7 +68,6 @@ $nomPage = 'ajouter_livre';
                 <form action="#" method="post">
                     <h2>Ajouter un nouveau livre</h2>
                     <div class="mb-3">
-                        <!-- <label for="titre" class="form-label">Titre du livre</label> -->
                         <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre : ex. La fille de papier *">
                     </div>
 

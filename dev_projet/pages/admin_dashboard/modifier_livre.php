@@ -15,6 +15,9 @@ if (!isset($_GET['id'])) {
 $titre_livre = $_GET['titre'];
 //ID VENANT DU GET (link)
 $id_livre = $_GET['id'];
+
+//OBLIGATOIRE
+require('../../clientActions/dbConnection.php');
 ?>
 
 <!DOCTYPE html>
@@ -47,55 +50,18 @@ $id_livre = $_GET['id'];
             'date_parution' => $_POST['date_parution'],
             'disponible' => $_POST['dispo_livre']
         ];
-        // var_dump($livre, $checkbox);
-        // die();
-        //CONNECTION BD AVEC PDO
-        $dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
-        //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-        $dbRequest = 'UPDATE livre 
-        SET id_livre=:id_livre,
-        titre_livre=:titre, 
-        disponibilite_livre=:disponible, 
-        date_parution_livre=:date_parution, 
-        id_theme=:id_theme, 
-        id_auteur=:id_auteur, 
-        id_editeur=:id_editeur 
-        WHERE id_livre=\'' . $id_livre . '\';';
 
-        // var_dump($dbRequest);
-        // die();
+        try {
 
-        //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
-        $dbResponse = $dbConnect->prepare($dbRequest);
-
-        //TRANSFORMER LE TITRE EN MAJUSCULE
-        $titre = trim(strtoupper($livre['titre']));
-
-        //TRANSFORMER LA CHECKBOX EN BOOLEAN
-        $checkbox = $livre['disponible'] ? 'Oui' : 'Non';
-
-        //FORMATTER ID LIVRE -> TITRE,THEME,AUTEUR,EDITEUR&DATE
-        //1-ON SUPPR LES ESPACES ET ON PREND LES 3 PREMIERS CARACTERES
-        $formatTitre = substr(str_replace(' ', '', $livre['titre']), 0, 3);
-        $formatDate = substr(str_replace(' ', '', $livre['date_parution']), 0, 3);
-
-        //2-ON RECUPERE LA CONCATENATION DE TOUTES LES CHAINES
-        $uniqueIdLivre = strtoupper($formatTitre . $livre['id_theme'] . $livre['id_auteur'] . $livre['id_editeur'] . $formatDate);
-
-        //COMPLETER LES DONNEES MANQUANTES A PARTIR DE LA REPONSE AVEC LE BINDPARAM
-        $dbResponse->bindParam(':id_livre', $uniqueIdLivre);
-        $dbResponse->bindParam(':titre', $titre);
-        $dbResponse->bindParam(':disponible', $checkbox);
-        $dbResponse->bindParam(':date_parution', $livre['date_parution']);
-        $dbResponse->bindParam(':id_theme', $livre['id_theme']);
-        $dbResponse->bindParam(':id_auteur', $livre['id_auteur']);
-        $dbResponse->bindParam(':id_editeur', $livre['id_editeur']);
-        //EXECUTER L'INSTRUCTION FINALE
-        $dbResponse->execute();
-
-        //REDIRECTION VERS TOUS LES LIVRES
-        header('Location:/pages/admin_dashboard/tous_les_livres.php');
-        exit();
+            //APPEL DE LA FONCTION modifierLivre
+            modifierLivre($livre, $id_livre);
+            //REDIRECTION VERS TOUS LES LIVRES
+            header('Location:/pages/admin_dashboard/tous_les_livres.php');
+            exit();
+        } catch (Exception $erreur) {
+            var_dump($erreur->getMessage());
+            exit();
+        }
     }
 
     ?>

@@ -7,15 +7,16 @@ if (!isset($_SESSION['userFirstName'])) {
     header('Location:/index.php');
 }
 
-//REQUETE SQL POUR OBTENIR TOUS LES LIVRES
-//CONNECTION BD AVEC PDO
-$dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
-//REQUETE A LA BASE DE DONNÉE SANS VARIABLE
-$dbRequest = 'SELECT * FROM livre INNER JOIN theme ON (livre.id_theme = theme.id_theme) INNER JOIN auteur ON (livre.id_auteur = auteur.id_auteur) INNER JOIN editeur ON (livre.id_editeur=editeur.id_editeur);';
-//REPONSE DE LA BD A PARTIR DE LA CONNECTION
-$dbResponse = $dbConnect->query($dbRequest);
-//AFFICHAGE DU RESULTAT AVEC FETCHALL
-$dataFromDB = $dbResponse->fetchAll(PDO::FETCH_ASSOC);
+//OBLIGATOIRE
+require('../../clientActions/dbConnection.php');
+
+try {
+    //REQUETE SQL POUR OBTENIR TOUS LES LIVRES
+    $dataFromDB = afficherLivres();
+} catch (Exception $erreur) {
+    var_dump($erreur->getMessage());
+    exit();
+}
 ?>
 
 <!DOCTYPE html>

@@ -1,7 +1,12 @@
 <?php
 session_start();
 $nomPage = "home";
-$email = ""
+$email = "";
+
+// REDIRECTION SI SESSION EXISTE
+if (isset($_SESSION['userFirstName'])) {
+    header('Location:/pages/admin_dashboard/accueil.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,14 +25,6 @@ $email = ""
 </head>
 
 <body>
-
-    <!-- REDIRECTION SI SESSION EXISTE -->
-    <?php
-    if (isset($_SESSION['userFirstName'])) {
-        header('Location:/pages/admin_dashboard/accueil.php');
-    }
-    ?>
-
     <div id="container">
         <?php
         require './composants/header.php';
@@ -38,33 +35,21 @@ $email = ""
             <!-- Si METHODE POST -->
             <?php
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // OBLIGATOIRE
+                require 'clientActions/dbConnection.php';
+
                 //RECUPERATION DES DONNEES DU FORMULAIRE
                 $client = [
                     'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
                     'password' => filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS)
                 ];
 
-                //CONNECTION BD AVEC PDO
-                $dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
-                //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-                $dbRequest = 'SELECT * FROM user WHERE email_user=:email';
-                //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
-                $dbResponse = $dbConnect->prepare($dbRequest);
-                //COMPLETER LES DONNEES MANQUANTES A PARTIR DE LA REPONSE AVEC LE BINDPARAM
-                $dbResponse->bindParam(':email', $client['email'], PDO::PARAM_STR);
-                //EXECUTER L'INSTRUCTION FINALE
-                $dbResponse->execute();
-
-                //Si LA RESPONSE EST POSITIVE -> DONC EMAIL EXISTE
-                if ($dbResponse->rowCount()) {
+                try {
+                    //AFFECTATION DU RETURN DE LA FONCTION A UNE VARIABLE
+                    $dataFromResponse = userConnection($client);
                     $email = $client['email'];
-                    $dataFromResponse = $dbResponse->fetch();
-
-                    // var_dump($dataFromResponse['id_categorie_user']);
-                    // die();
-
                     //VERIFICATION SI USER EST ADMIN
-                    if ($dataFromResponse['id_categorie_user'] === "1") {
+                    if ($dataFromResponse['id_categorie_user'] === "2") {
                         //VERIFICATION DU MDP
                         $passwordVerify = password_verify($client['password'], $dataFromResponse['password_user']);
                         //SI MDP BON
@@ -85,11 +70,9 @@ $email = ""
                         //PAGE INFORMATION DE REDIRECTION VERS LE SITE UTILISATEUR
                         header('Location:/pages/redirect_userWebsite.php');
                     }
-                } else {
+                } catch (Exception $error) {
                     //Boite alert
-                    echo '<div class="alert alert-danger" role="alert">
-                        Email inexistant
-                        </div>';
+                    echo '<div class="alert alert-danger" role="alert">' . $error->getMessage() . '</div>';
                 }
             }
             ?>
@@ -119,5 +102,3 @@ $email = ""
 </body>
 
 </html>
-
-<!-- https://www.justgeek.fr/wp-content/uploads/2021/06/windows-11-fond-ecran-wallpaper-3-scaled.jpg -->

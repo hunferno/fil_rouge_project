@@ -1,5 +1,6 @@
 /* MAIN  */
 #accueil_dashboard {
+  flex: 1;
   padding: 35px;
   display: grid;
   grid-gap: 10px;
@@ -73,7 +74,7 @@ aside {
 /* ----------------FIN PAGE AJOUTER LIVRE--------------- */
 /* ----------------PAGE AFFICHAGE DE TOUS LES LIVRE--------------- */
 
-/* ----------------FIN PAGE AJOUTER LIVRE--------------- */
 .table {
   margin: 20px 0;
 }
+/* ----------------FIN PAGE AJOUTER LIVRE--------------- */
