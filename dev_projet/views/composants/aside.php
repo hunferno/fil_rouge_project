@@ -3,7 +3,7 @@
         <!-- <a href="/pages/admin_dashboard/accueil.php">
                         <li><i class="fas fa-home"></i> Accueil</li>
                     </a> -->
-        <a href="/pages/admin_dashboard/ajouter_livre.php">
+        <a href="index.php?entite=livre&action=FormAjoutLivre">
             <li><i class="fas fa-book-medical"></i> Ajouter un livre</li>
         </a>
         <a href="/pages/admin_dashboard/tous_les_livres.php">

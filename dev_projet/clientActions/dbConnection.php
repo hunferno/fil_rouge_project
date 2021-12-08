@@ -29,7 +29,7 @@ function userConnection($client)
         $dataFromResponse = $dbResponse->fetch();
         return $dataFromResponse;
     } else {
-        throw new Exception('Email inexistant');
+        throw new Exception('Email inexistant dans la base de données');
     }
 }
 
