@@ -11,7 +11,7 @@
         echo "
         <div class='profile'>
         <h3>Bienvenue $userFirstName $userLastName</h3>
-        <a href='/clientActions/deconnect.php'><i class='fas fa-sign-out-alt fa-2x'></i></a>
+        <a href='index.php?entite=user&action=deconnexion'><i class='fas fa-sign-out-alt fa-2x'></i></a>
         </div>
         ";
     }

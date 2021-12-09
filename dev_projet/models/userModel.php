@@ -50,7 +50,14 @@ function connexion()
         $erreur = '<div class="alert alert-danger" role="alert">' . $error->getMessage() . '</div>';
         $vue = 'connexionMain';
     }
+}
 
-    //     var_dump($vue, $email);
-    //     die();
+function deconnexion($session)
+{
+    global $vue;
+
+    $session = array();
+    session_destroy();
+
+    $vue = 'connexionMain';
 }

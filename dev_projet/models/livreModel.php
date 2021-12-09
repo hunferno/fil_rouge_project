@@ -19,7 +19,6 @@ function ajouterUnLivre()
     try {
         //APPEL DE LA FONCTION ajouterLivre
         ajouterLivre($livre);
-        $vue = 'views/livres/ajouter_livre';
     } catch (Exception $erreur) {
         var_dump($erreur->getMessage());
         exit();
@@ -31,7 +30,6 @@ function afficherTousLesLivres()
     global $vue;
 
     try {
-        $vue = 'views/livres/tous_les_livres';
         //REQUETE SQL POUR OBTENIR TOUS LES LIVRES
         $dataFromDB = afficherLivres();
         return $dataFromDB;
@@ -41,16 +39,15 @@ function afficherTousLesLivres()
     }
 }
 
-function supprimerLivre($db, $id_livre)
+function supprimerLivre($id_livre)
 {
-
     global $vue;
+    global $dbConnect;
 
     try {
-        $vue = 'views/livres/tous_les_livres';
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = "DELETE FROM livre WHERE id_livre =:id;";
-        $prepareRequest = $db->prepare($dbRequest);
+        $prepareRequest = $dbConnect->prepare($dbRequest);
         //AJOUT DES VARIABLES
         $prepareRequest->bindParam(':id', $id_livre);
         //EXECUTION DE LA REQUETE
