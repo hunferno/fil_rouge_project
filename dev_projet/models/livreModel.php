@@ -39,6 +39,28 @@ function afficherTousLesLivres()
     }
 }
 
+function modifierUnLivre($id_livre)
+{
+    global $vue;
+
+    $livre = [
+        'titre' => $_POST['titre'],
+        'id_theme' => $_POST['theme'],
+        'id_auteur' => $_POST['auteur'],
+        'id_editeur' => $_POST['editeur'],
+        'date_parution' => $_POST['date_parution'],
+        'disponible' => $_POST['dispo_livre']
+    ];
+
+    try {
+        //APPEL DE LA FONCTION ajouterLivre
+        modifierLivre($livre, $id_livre);
+    } catch (Exception $erreur) {
+        var_dump($erreur->getMessage());
+        exit();
+    }
+}
+
 function supprimerLivre($id_livre)
 {
     global $vue;

@@ -39,7 +39,7 @@ if (empty($_SESSION)) {
                     <td>$value[nom_auteur]</td>
                     <td>$value[raison_sociale_editeur]</td>
                     <td>$value[disponibilite_livre]</td>
-                    <td><a href='index.php?entite=livre&action=modifierLivre&titre=$value[titre_livre]&id=$value[id_livre]'><i class='far fa-edit'></i></a> 
+                    <td><a href='index.php?entite=livre&action=FormModifLivre&titre=$value[titre_livre]&id=$value[id_livre]'><i class='far fa-edit'></i></a> 
                     <a href='index.php?entite=livre&action=supprimerLivre&id=$value[id_livre]'>
                     <i class='far fa-trash-alt'></i></a></td>
                     </tr>";

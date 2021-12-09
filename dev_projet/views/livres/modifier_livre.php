@@ -4,16 +4,15 @@ if (empty($_SESSION)) {
     header('Location:index.php?entite=redirection&action=redirectHome');
 }
 ?>
-
 <main id="accueil_dashboard">
     <?php
     require 'views/composants/aside.php';
     ?>
     <section class="dashboard_ajouterLivre">
-        <form action="index.php?entite=livre&action=ajoutLivreDb" method="post">
-            <h2>Ajouter un nouveau livre</h2>
+        <form action="index.php?entite=livre&action=modifierLivreDb&id=<?php echo $_GET['id'] ?>" method="post">
+            <h2>Modifier le livre <em>'<?php echo "$titre_livre" ?>'</em></h2>
             <div class="mb-3">
-                <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre : ex. La fille de papier *">
+                <input type="text" class="form-control" name="titre" value="<?php echo $titre_livre ?>" id="titre" placeholder="Titre : ex. La fille de papier *">
             </div>
 
             <select class="mb-3 form-select" name="theme" required>
@@ -67,7 +66,7 @@ if (empty($_SESSION)) {
                 <label class="form-check-label" for="dispo_livre">Disponible immédiatement</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Enregistrer livre</button>
+            <button type="submit" class="btn btn-primary">Modifier livre</button>
         </form>
         </form>
     </section>

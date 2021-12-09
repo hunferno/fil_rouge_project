@@ -61,3 +61,32 @@ function deconnexion($session)
 
     $vue = 'connexionMain';
 }
+
+function ajouterUser()
+{
+}
+
+function autre()
+{
+    //RECUPERATION DES DONNEES DU FORMULAIRE
+    $user = [
+        'nom_user' => $_POST['nom'],
+        'prenom_user' => $_POST['prenom'],
+        'adresse_user' => $_POST['adresse'],
+        'telephone_user' => $_POST['telephone'],
+        'mdp' => $_POST['mdp'],
+        'confirmMDP' => $_POST['confirmMDP'],
+        'date_inscription_user' => date("y.m.d"),
+        'categorie_user' => $_POST['categorie'],
+    ];
+
+    try {
+        //APPEL DE LA FONCTION ajouterLivre
+        // ajouterLivre($livre);
+    } catch (Exception $erreur) {
+        var_dump($erreur->getMessage());
+        exit();
+    }
+
+    //FIN TRAITEMENT DES DONNEES ENVOYER
+}

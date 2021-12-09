@@ -23,14 +23,6 @@
     <div id="container">
         <?php
         require 'views/composants/header.php';
-        // if (empty($_SESSION)) {
-        //     require $vue . '.php';
-        // } else {
-        //     echo '<div id="accueil_dashboard">';
-        //     require 'views/composants/aside.php';
-        //     require $vue . '.php';
-        //     echo '</div>';
-        // }
         require $vue . '.php';
         require 'views/composants/footer.php';
         ?>
