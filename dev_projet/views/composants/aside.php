@@ -9,7 +9,7 @@
         <a href="index.php?entite=livre&action=afficherTousLesLivres">
             <li><i class="fas fa-swatchbook"></i> Tous les livres</li>
         </a>
-        <a href="">
+        <a href="/pages/admin_dashboard/ajouter_user.php">
             <li><i class="fas fa-user-plus"></i> Ajouter un utilisateur</li>
         </a>
         <a href="">

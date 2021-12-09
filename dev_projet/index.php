@@ -11,9 +11,6 @@ if (empty($_SESSION)) {
     $email = $_SESSION['userEmail'];
 }
 
-// var_dump($vue, $email);
-// die();
-
 if (empty($_GET)) {
     $entite = '';
     $action = 'home';
