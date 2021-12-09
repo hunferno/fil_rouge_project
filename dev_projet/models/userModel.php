@@ -17,19 +17,21 @@ function connexion()
     ];
 
     try {
+
         //AFFECTATION DU RETURN DE LA FONCTION A UNE VARIABLE
         $dataFromResponse = userConnection($client);
-        $email = $client['email'];
         //VERIFICATION SI USER EST ADMIN
         if ($dataFromResponse['id_categorie_user'] === "1") {
+            $email = $dataFromResponse['email_user'];
             //VERIFICATION DU MDP
             $passwordVerify = password_verify($client['password'], $dataFromResponse['password_user']);
+
             //SI MDP BON
             if ($passwordVerify) {
                 $_SESSION["userFirstName"] = $dataFromResponse["prenom_user"];
                 $_SESSION["userLastName"] = $dataFromResponse["nom_user"];
                 $_SESSION["userPhone"] = $dataFromResponse["telephone_user"];
-                $_SESSION["userEmail"] = $dataFromResponse["email_user"];
+                $_SESSION['userEmail'] = $dataFromResponse['email_user'];
                 // header('Location:/pages/admin_dashboard/accueil.php');
                 // exit();
                 $vue = 'users/accueil';
@@ -41,12 +43,14 @@ function connexion()
             }
         } else {
             //PAGE INFORMATION DE REDIRECTION VERS LE SITE UTILISATEUR
-            // header('Location:/pages/redirect_userWebsite.php');
             $vue = 'erreurs/redirect_userWebsite';
         }
     } catch (Exception $error) {
-        //Boite alert
+        //Boite alert SI EMAIL INEXISTANT
         $erreur = '<div class="alert alert-danger" role="alert">' . $error->getMessage() . '</div>';
         $vue = 'connexionMain';
     }
+
+    //     var_dump($vue, $email);
+    //     die();
 }

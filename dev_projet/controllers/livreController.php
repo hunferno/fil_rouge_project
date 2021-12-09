@@ -7,11 +7,29 @@ switch ($action) {
         //APPEL DU MODEL POUR TRAITEMENT
         $vue = 'livres/ajouter_livre';
         break;
-    case 'ajouter':
+    case 'ajoutLivreDb':
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/livreModel.php';
         //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
         ajouterUnLivre();
+        break;
+    case 'afficherTousLesLivres':
+        //APPEL DU MODEL POUR TRAITEMENT
+        require 'models/livreModel.php';
+        //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
+        $dataFromDB = afficherTousLesLivres();
+        break;
+    case 'modifierLivre':
+        //APPEL DU MODEL POUR TRAITEMENT
+        require 'models/livreModel.php';
+        //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
+        $dataFromDB = afficherTousLesLivres();
+        break;
+    case 'supprimerLivre':
+        //APPEL DU MODEL POUR TRAITEMENT
+        require 'models/livreModel.php';
+        //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
+        supprimerLivre($dbConnect, $_GET['id']);
         break;
 
     default:

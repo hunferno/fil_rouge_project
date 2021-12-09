@@ -1,9 +1,18 @@
 <?php
+//OUVERTURE DE LA SESSION
+session_start();
 //DECLARATION DES VARIABLES
 $erreur = '';
 $vue = '';
-$email = '';
+// $email;
+if (empty($_SESSION)) {
+    $email = '';
+} else {
+    $email = $_SESSION['userEmail'];
+}
 
+// var_dump($vue, $email);
+// die();
 
 if (empty($_GET)) {
     $entite = '';
@@ -36,5 +45,4 @@ switch ($entite) {
         $vue = 'connexionMain';
         break;
 }
-
 require('views/templateView.php');

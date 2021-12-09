@@ -1,6 +1,6 @@
 <header>
     <div class="logo">
-        <a href="/index.php"><img src="/asset/LOGO.jpg" alt="logo du site"></a>
+        <a href="index.php?entite=redirection&action=redirectHome"><img src="/asset/LOGO.jpg" alt="logo du site"></a>
         <h1>Médiathèque du Sud</h1>
     </div>
 

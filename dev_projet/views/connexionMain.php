@@ -1,7 +1,8 @@
 <?php
 // REDIRECTION SI SESSION EXISTE
-if (!empty($_SESSION)) {
-    header('Location:views/users/accueil.php');
+if (!empty($_SESSION['userPhone'])) {
+    header('Location:index.php?entite=redirection&action=redirectHome');
+    exit();
 }
 ?>
 

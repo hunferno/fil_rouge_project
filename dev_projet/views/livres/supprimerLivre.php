@@ -1,8 +1,5 @@
 <?php
 
-//CONNECTION BD AVEC PDO
-$dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
-
 function supprimerLivre($db, $id_livre)
 {
     //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE

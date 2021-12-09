@@ -1,11 +1,10 @@
 <?php
 // REDIRECTION SI SESSION N'EXISTE PAS
-// if (empty($_SESSION)) {
-//     header('Location:index.php');
-// }
+if (empty($_SESSION)) {
+    header('Location:index.php?entite=redirection&action=redirectHome');
+}
 
 // $nomPage = 'admin_dashboard_accueil';
-$email = $_SESSION['userEmail'];
 $telephone = $_SESSION['userPhone'];
 ?>
 

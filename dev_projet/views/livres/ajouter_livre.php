@@ -1,17 +1,15 @@
 <?php
 // REDIRECTION SI SESSION N'EXISTE PAS
-// if (!isset($_SESSION['userFirstName'])) {
-//     header('Location:/index.php');
-// }
+if (empty($_SESSION)) {
+    header('Location:index.php?entite=redirection&action=redirectHome');
+}
 ?>
 <main id="accueil_dashboard">
     <?php
-    // var_dump($_SESSION);
-    // die();
     require 'views/composants/aside.php';
     ?>
     <section class="dashboard_ajouterLivre">
-        <form action="#" method="post">
+        <form action="index.php?entite=livre&action=ajoutLivreDb" method="post">
             <h2>Ajouter un nouveau livre</h2>
             <div class="mb-3">
                 <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre : ex. La fille de papier *">
