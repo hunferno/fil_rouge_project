@@ -24,9 +24,6 @@ if (empty($_SESSION)) {
                     <th scope="col">Image</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
-                    <!-- <th scope="col">Email</th>
-                    <th scope="col">Adresse Postale</th>
-                    <th scope="col">Téléphone</th> -->
                     <th scope="col">Catégorie</th>
                     <th scope="col">Fin de l'abonnement</th>
                 </tr>
@@ -35,16 +32,12 @@ if (empty($_SESSION)) {
                 <?php
                 //EXPLOITER LES DONNEES
                 foreach ($dataFromDB as $value) {
-                    // echo "$value[id_livre]";
-                    // <th scope='row'>$value[id_livre]</th>
-                    // <th scope='row'>$value[id_livre]</th>
-                    // <td>$value[titre_livre]</td>
                     echo "<tr>";
                     switch ($value['nom_categorie_user']) {
-                        case 'professeur':
+                        case 'PROFESSEUR':
                             echo "<td><img class='image_livre' src='asset/images/users/profs/$value[photo_profile_user]'/></td>";
                             break;
-                        case 'etudiant':
+                        case 'ETUDIANT':
                             echo "<td><img class='image_livre' src='asset/images/users/eleves/$value[photo_profile_user]'/></td>";
                             break;
                     }
@@ -54,26 +47,21 @@ if (empty($_SESSION)) {
                     <td>$value[nom_categorie_user]</td>
                     <td>$value[expiration_abo_user]</td>
 
-                    <td><a href='index.php?entite=livre&action=FormModifLivre&nom=$value[nom_user]&prenom=$value[prenom_user]&id=$value[uniqueId_user]'><i class='far fa-edit'></i></a> 
-                    <a href='index.php?entite=livre&action=supprimerLivre&id=$value[uniqueId_user]'>
+                    <td><a href='index.php?entite=user&action=FormModifUser&nom=$value[nom_user]&prenom=$value[prenom_user]&id=$value[uniqueId_user]'><i class='far fa-edit'></i></a> 
+                    <a href='index.php?entite=user&action=supprimerUser&id=$value[uniqueId_user]&imagePath=$value[photo_profile_user]&categorie=$value[nom_categorie_user]'>
                     <i class='far fa-trash-alt'></i></a></td>
                     </tr>
                     <tr class='info_user'>
                         <td colspan='6'>
                             <div>
-                            
-                            </div>
-                            <div>
-                            
+                            <p><b>Téléphone </b>: $value[telephone_user]</p>
+                            <p><b>Email </b>: $value[email_user]</p>
+                            <p><b>Adresse Postale </b>: $value[adresse_user]</p>
                             </div>
                         </td>
                     </tr>
                     ";
                 };
-                // <td>$value[email_user]</td>
-                // <td>$value[adresse_user]</td>
-                // <td>$value[telephone_user]</td>
-
                 ?>
             </tbody>
         </table>

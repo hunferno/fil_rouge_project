@@ -43,7 +43,7 @@ if (empty($_SESSION)) {
                     <td>$value[raison_sociale_editeur]</td>
                     <td>$value[disponibilite_livre]</td>
                     <td><a href='index.php?entite=livre&action=FormModifLivre&titre=$value[titre_livre]&id=$value[id_livre]'><i class='far fa-edit'></i></a> 
-                    <a href='index.php?entite=livre&action=supprimerLivre&id=$value[id_livre]'>
+                    <a href='index.php?entite=livre&action=supprimerLivre&id=$value[id_livre]&imagePath=$value[photo_livre]'>
                     <i class='far fa-trash-alt'></i></a></td>
                     </tr>";
                 };

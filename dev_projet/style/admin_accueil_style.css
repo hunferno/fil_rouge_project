@@ -41,7 +41,7 @@ aside {
   margin: 0 8px;
 }
 
-/* DASHBOARD CONTAINT */
+/* DASHBOARD CONTENT */
 
 .dashboard_containt {
   grid-column: 5/13;
@@ -87,3 +87,12 @@ aside {
   height: 75px;
 }
 /* ----------------FIN PAGE AJOUTER LIVRE--------------- */
+/* ------------------PAGE AFFICHAGE TOUS LES USER---------- */
+tr {
+  border-bottom: 1.12px solid whitesmoke;
+}
+
+.info_user {
+  display: none;
+}
+/* ------------------FIN PAGE AFFICHAGE TOUS LES USER---------- */

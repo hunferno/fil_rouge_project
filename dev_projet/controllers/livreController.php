@@ -8,8 +8,7 @@ switch ($action) {
         break;
 
     case 'FormModifLivre':
-        // var_dump($_GET['titre']);
-        // die();
+        //CREATION DES VARIABLE UTILES A LA PAGE
         $titre_livre = $_GET["titre"];
         $id_livre = $_GET['id'];
         //APPEL DE LA VUE
@@ -52,7 +51,7 @@ switch ($action) {
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/livreModel.php';
         //UTILISATION DE LE FONCTION POUR SUPPRIMER LIVRE
-        supprimerUnLivre($_GET['id']);
+        supprimerUnLivre($_GET['id'], $_GET['imagePath']);
         //UTILISATION DE LE FONCTION POUR AFFICHER LES LIVRES
         $dataFromDB = afficherTousLesLivres();
         //AFFICHER LA PAGE DES LIVRES

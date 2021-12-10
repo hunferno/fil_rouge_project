@@ -124,6 +124,57 @@ function afficherUsers()
     return $dataFromDB;
 }
 
+function supprimerUser($id_user)
+{
+    global $dbConnect;
+
+    //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
+    $dbRequest = "DELETE FROM user WHERE uniqueId_user =:id;";
+    $prepareRequest = $dbConnect->prepare($dbRequest);
+    //AJOUT DES VARIABLES
+    $prepareRequest->bindParam(':id', $id_user);
+    //EXECUTION DE LA REQUETE
+    $prepareRequest->execute();
+}
+
+function modifierUser($id_user, $user)
+{
+    //BESOIN DE LA CONNEXION A LA BASE
+    global $dbConnect;
+    global $erreur;
+
+    //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
+    $dbRequest = 'UPDATE user 
+    SET nom_user=:nom_user,
+    prenom_user=:prenom_user, 
+    password_user=:password_user, 
+    id_categorie_user=:id_categorie_user, 
+    WHERE uniqueId_user=\'' . $id_user . '\';';
+
+    //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
+    $dbResponse = $dbConnect->prepare($dbRequest);
+
+    //TRANSFORMER LES DONNÉES EN MAJUSCULE
+    $nom_user = trim(strtoupper($user['nom']));
+    $prenom_user = trim(strtoupper($user['prenom']));
+
+    //VERIFICATION DU PASSWORD
+    if ($user['password'] === $user['confirmMDP']) {
+        //CRYPTAGE SI PASSWORD VERIFIE
+        $password_user = password_hash($user['password'], PASSWORD_DEFAULT);
+
+        //COMPLETER LES DONNEES MANQUANTES A PARTIR DE LA REPONSE AVEC LE BINDPARAM
+        $dbResponse->bindParam(':nom_user', $nom_user);
+        $dbResponse->bindParam(':prenom_user', $prenom_user);
+        $dbResponse->bindParam(':password_user',  $password_user);
+        $dbResponse->bindParam(':id_categorie_user', $user['categorie']);
+        //EXECUTER L'INSTRUCTION FINALE
+        $dbResponse->execute();
+    } else {
+        $erreur = '<div class="alert alert-danger" role="alert">
+        Les mots de passe doivent être identiques</div>';
+    }
+}
 
 //-----------SECTION FOR BOOKS-----------------
 function ajouterLivre($livre)

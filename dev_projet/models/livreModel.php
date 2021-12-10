@@ -66,10 +66,14 @@ function modifierUnLivre($id_livre)
     }
 }
 
-function supprimerUnLivre($id_livre)
+function supprimerUnLivre($id_livre, $imagePath)
 {
     try {
         supprimerLivre($id_livre);
+        //SUPPRIMER IMAGE STOCKEE
+        if ($imagePath !== 'empty_book.png') {
+            unlink('asset/images/livres/' . $imagePath);
+        }
     } catch (\Throwable $erreur) {
         var_dump($erreur->getMessage());
         exit();

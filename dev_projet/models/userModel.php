@@ -124,3 +124,47 @@ function afficherTousLesUsers()
         exit();
     }
 }
+
+function supprimerUnUser($uniqueId, $categorie, $imagePath)
+{
+    try {
+        supprimerUser($uniqueId);
+        //SUPPRIMER IMAGE STOCKEE
+        if ($imagePath !== 'empty_user.png') {
+            switch ($categorie) {
+                case 'ETUDIANT':
+                    unlink('asset/images/users/eleves/' . $imagePath);
+                    break;
+                case 'PROFESSEUR':
+                    unlink('asset/images/users/profs/' . $imagePath);
+                    break;
+            }
+        }
+    } catch (Exception $err) {
+        var_dump($err);
+        exit();
+    }
+}
+
+function modifierUnUser($id_user)
+{
+    //RECUPERATION DES DONNEES DU FORMULAIRE
+    $user = [
+        'nom' => filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_SPECIAL_CHARS),
+        'prenom' => filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_SPECIAL_CHARS),
+        // 'adresse' => filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_SPECIAL_CHARS),
+        // 'telephone' => filter_input(INPUT_POST, 'telephone'),
+        // 'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
+        'password' => filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_SPECIAL_CHARS),
+        'confirmMDP' => filter_input(INPUT_POST, 'confirmMDP', FILTER_SANITIZE_SPECIAL_CHARS),
+        'categorie' => filter_input(INPUT_POST, 'categorie', FILTER_SANITIZE_SPECIAL_CHARS),
+        // 'photo_user' => $nom_photo_user
+    ];
+
+    try {
+        modifierUser($id_user, $user);
+    } catch (Exception $err) {
+        var_dump($err);
+        exit();
+    }
+}
