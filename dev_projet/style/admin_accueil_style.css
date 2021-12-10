@@ -76,5 +76,14 @@ aside {
 
 .table {
   margin: 20px 0;
+  text-align: center;
+}
+
+.table tbody tr td {
+  vertical-align: baseline;
+}
+
+.table tr img {
+  height: 75px;
 }
 /* ----------------FIN PAGE AJOUTER LIVRE--------------- */

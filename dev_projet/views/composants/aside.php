@@ -12,7 +12,7 @@
         <a href="index.php?entite=user&action=FormAjoutUser">
             <li><i class="fas fa-user-plus"></i> Ajouter un utilisateur</li>
         </a>
-        <a href="">
+        <a href="index.php?entite=user&action=afficherTousLesUsers">
             <li><i class="fas fa-users"></i> Tous les utilisateurs</li>
         </a>
     </nav>

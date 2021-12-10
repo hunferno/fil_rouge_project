@@ -30,6 +30,14 @@ switch ($action) {
         $vue = 'views/users/ajouter_user';
         break;
 
+    case 'afficherTousLesUsers':
+        //APPEL DU MODEL POUR TRAITEMENT
+        require 'models/userModel.php';
+        //APPEL DE LA FONCTION D'AFFICHAGE DES USERS
+        $dataFromDB = afficherTousLesUsers();
+        $vue = 'views/users/tous_les_users';
+        break;
+
     default:
         # code...
         break;

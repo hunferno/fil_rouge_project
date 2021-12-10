@@ -10,7 +10,7 @@ if (empty($_SESSION)) {
     require 'views/composants/aside.php';
     ?>
     <section class="dashboard_ajouterLivre">
-        <form action="index.php?entite=livre&action=ajoutLivreDb" method="post">
+        <form action="index.php?entite=livre&action=ajoutLivreDb" method="post" enctype="multipart/form-data">
             <h2>Ajouter un nouveau livre</h2>
             <div class="mb-3">
                 <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre : ex. La fille de papier *">
@@ -56,6 +56,11 @@ if (empty($_SESSION)) {
                 <option value="7">Allary</option>
                 <option value="8">Julliard</option>
             </select>
+
+            <div class="mb-3" style='display:flex; flex-direction:column'>
+                <label for="file" class="form-label">Selectionner une image</label>
+                <input type="file" name="image_livre" id="file">
+            </div>
 
             <div class="mb-3">
                 <label for="date" class="form-label">Date de parution *</label>

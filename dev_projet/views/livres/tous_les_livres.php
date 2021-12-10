@@ -21,7 +21,7 @@ if (empty($_SESSION)) {
         <table class="table table-dark table-striped">
             <thead>
                 <tr>
-                    <th scope="col">ID Livre</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Titre</th>
                     <th scope="col">Auteur</th>
                     <th scope="col">Éditeur</th>
@@ -30,11 +30,14 @@ if (empty($_SESSION)) {
             </thead>
             <tbody>
                 <?php
-                //FORMATTER LA DISPONIBILITE
+                //EXPLOTER LES DONNEES
                 foreach ($dataFromDB as $value) {
                     // echo "$value[id_livre]";
+                    // <th scope='row'>$value[id_livre]</th>
+                    // <th scope='row'>$value[id_livre]</th>
+                    // <td>$value[titre_livre]</td>
                     echo "<tr>
-                    <th scope='row'>$value[id_livre]</th>
+                    <td><img class='image_livre' src='asset/images/livres/$value[photo_livre]'/></td>
                     <td>$value[titre_livre]</td>
                     <td>$value[nom_auteur]</td>
                     <td>$value[raison_sociale_editeur]</td>

@@ -2,7 +2,7 @@
 
 //CONNECTION BD AVEC PDO AVEC PDO EXCEPTION
 try {
-    $dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge;charset=utf8', 'root', '');
+    $dbConnect = new PDO('mysql:host=localhost;dbname=fil_rouge_maj01;charset=utf8', 'root', '');
     $dbConnect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $erreur) {
     //Envoyer une page d'erreur si connexion echouée
@@ -42,7 +42,7 @@ function ajouterUser($user)
     global $erreur;
 
     //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-    $dbRequest = 'INSERT INTO user VALUES (:uniqueId_user, :nom_user, :prenom_user, :adresse_user, :telephone_user, :email_user, :password_user, :date_inscription_user, :id_categorie_user)';
+    $dbRequest = 'INSERT INTO user VALUES (:uniqueId_user, :nom_user, :prenom_user, :adresse_user, :telephone_user, :email_user, :password_user, :date_inscription_user, :photo_user, :expiration_abonnement, :id_categorie_user)';
     //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
     $dbResponse = $dbConnect->prepare($dbRequest);
 
@@ -54,6 +54,10 @@ function ajouterUser($user)
 
     //TRANSFORMER LES DONNÉES EN MINISCULE
     $email_user = trim(strtolower($user['email']));
+
+    //FORMATAGE DES DATES D'ABONNEMENT ET EXPIRATION_ABONNEMENT
+    $date_inscription = date("Y.m.d");
+    $expiration_abonnement = date("Y.m.d", strtotime('+1 year'));
 
     //FORMATTER UNIQUE ID USER -> NOM,PRENOM,NBRE ALEATOIRE
     //1-ON SUPPR LES ESPACES ET ON PREND LES 3 PREMIERS CARACTERES
@@ -78,9 +82,11 @@ function ajouterUser($user)
     //CREATION DE UNIQUE ID
     $uniqueId_user = $nom_user_cut . $prenom_user_cut . $new_nbre_aleatoire;
 
+    //VERIFICATION DU PASSWORD
     if ($user['password'] === $user['confirmMDP']) {
-        //VERIFICATION DU PASSWORD
-        $password_user = $user['password'];
+
+        //CRYPTAGE SI PASSWORD VERIFIE
+        $password_user = password_hash($user['password'], PASSWORD_DEFAULT);
 
         //COMPLETER LES DONNEES MANQUANTES A PARTIR DE LA REPONSE AVEC LE BINDPARAM
         $dbResponse->bindParam(':uniqueId_user', $uniqueId_user);
@@ -90,7 +96,9 @@ function ajouterUser($user)
         $dbResponse->bindParam(':telephone_user', $telephone_user);
         $dbResponse->bindParam(':email_user', $email_user);
         $dbResponse->bindParam(':password_user',  $password_user);
-        $dbResponse->bindParam(':date_inscription_user', $user['date_inscription']);
+        $dbResponse->bindParam(':date_inscription_user', $date_inscription);
+        $dbResponse->bindParam(':photo_user', $user['photo_user']);
+        $dbResponse->bindParam(':expiration_abonnement', $expiration_abonnement);
         $dbResponse->bindParam(':id_categorie_user', $user['categorie']);
         //EXECUTER L'INSTRUCTION FINALE
         $dbResponse->execute();
@@ -98,6 +106,22 @@ function ajouterUser($user)
         $erreur = '<div class="alert alert-danger" role="alert">
         Les mots de passe doivent être identiques</div>';
     }
+}
+
+function afficherUsers()
+{
+    //VARIABLE GLOBALE DB
+    global $dbConnect;
+
+    //REQUETE A LA BASE DE DONNÉE SANS VARIABLE
+    $dbRequest = 'SELECT * FROM user NATURAL JOIN categorie_user WHERE id_categorie_user != 1;';
+
+    //REPONSE DE LA BD A PARTIR DE LA CONNECTION
+    $dbResponse = $dbConnect->query($dbRequest);
+    //AFFICHAGE DU RESULTAT AVEC FETCHALL
+    $dataFromDB = $dbResponse->fetchAll(PDO::FETCH_ASSOC);
+
+    return $dataFromDB;
 }
 
 
@@ -108,7 +132,7 @@ function ajouterLivre($livre)
     global $dbConnect;
 
     //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-    $dbRequest = 'INSERT INTO livre VALUES (:id_livre, :titre, :disponible, :date_parution, :id_theme, :id_auteur, :id_editeur)';
+    $dbRequest = 'INSERT INTO livre VALUES (:id_livre, :titre, :disponible, :date_parution, :photo_livre, :id_theme, :id_auteur, :id_editeur)';
     //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
     $dbResponse = $dbConnect->prepare($dbRequest);
 
@@ -131,6 +155,7 @@ function ajouterLivre($livre)
     $dbResponse->bindParam(':titre', $titre);
     $dbResponse->bindParam(':disponible', $checkbox);
     $dbResponse->bindParam(':date_parution', $livre['date_parution']);
+    $dbResponse->bindParam(':photo_livre', $livre['image_livre']);
     $dbResponse->bindParam(':id_theme', $livre['id_theme']);
     $dbResponse->bindParam(':id_auteur', $livre['id_auteur']);
     $dbResponse->bindParam(':id_editeur', $livre['id_editeur']);

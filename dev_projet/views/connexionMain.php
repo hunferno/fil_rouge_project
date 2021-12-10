@@ -1,4 +1,11 @@
 <?php
+// ZONE DE TEST
+// $test = mktime(0, 0, 0, date("d"), date("m"), date('Y'));
+// $date_inscription = date("Y.m.d", strtotime('+5 year'));
+// $expiration_abonnement = date($test);
+// var_dump($date_inscription);
+// die();
+
 // REDIRECTION SI SESSION EXISTE
 if (!empty($_SESSION['userPhone'])) {
     header('Location:index.php?entite=redirection&action=redirectHome');
