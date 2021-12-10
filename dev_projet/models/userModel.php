@@ -62,31 +62,32 @@ function deconnexion($session)
     $vue = 'connexionMain';
 }
 
-function ajouterUser()
+function ajouterUnUser()
 {
-}
-
-function autre()
-{
+    global $erreur;
     //RECUPERATION DES DONNEES DU FORMULAIRE
     $user = [
-        'nom_user' => $_POST['nom'],
-        'prenom_user' => $_POST['prenom'],
-        'adresse_user' => $_POST['adresse'],
-        'telephone_user' => $_POST['telephone'],
-        'mdp' => $_POST['mdp'],
+        'nom' => $_POST['nom'],
+        'prenom' => $_POST['prenom'],
+        'adresse' => $_POST['adresse'],
+        'telephone' => $_POST['telephone'],
+        'email' => $_POST['email'],
+        'password' => $_POST['mdp'],
         'confirmMDP' => $_POST['confirmMDP'],
-        'date_inscription_user' => date("y.m.d"),
-        'categorie_user' => $_POST['categorie'],
+        'date_inscription' => date("Y.m.d"),
+        'categorie' => $_POST['categorie'],
     ];
 
     try {
-        //APPEL DE LA FONCTION ajouterLivre
-        // ajouterLivre($livre);
+
+        // APPEL DE LA FONCTION ajouterUser
+        ajouterUser($user);
     } catch (Exception $erreur) {
         var_dump($erreur->getMessage());
         exit();
     }
+}
 
-    //FIN TRAITEMENT DES DONNEES ENVOYER
+function autre()
+{
 }

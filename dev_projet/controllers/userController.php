@@ -26,7 +26,7 @@ switch ($action) {
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/userModel.php';
         //UTILISATION DE LE FONCTION POUR DECONNECTER USER
-        ajouterUser();
+        ajouterUnUser();
         $vue = 'views/users/ajouter_user';
         break;
 

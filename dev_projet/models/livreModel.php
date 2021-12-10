@@ -61,19 +61,10 @@ function modifierUnLivre($id_livre)
     }
 }
 
-function supprimerLivre($id_livre)
+function supprimerUnLivre($id_livre)
 {
-    global $vue;
-    global $dbConnect;
-
     try {
-        //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
-        $dbRequest = "DELETE FROM livre WHERE id_livre =:id;";
-        $prepareRequest = $dbConnect->prepare($dbRequest);
-        //AJOUT DES VARIABLES
-        $prepareRequest->bindParam(':id', $id_livre);
-        //EXECUTION DE LA REQUETE
-        $prepareRequest->execute();
+        supprimerLivre($id_livre);
     } catch (\Throwable $erreur) {
         var_dump($erreur->getMessage());
         exit();

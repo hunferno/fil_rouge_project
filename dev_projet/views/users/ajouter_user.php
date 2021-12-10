@@ -13,6 +13,9 @@ if (empty($_SESSION)) {
         <form action="index.php?entite=user&action=ajouter_user" method="post">
             <h2>Ajouter un nouvel utilisateur</h2>
 
+            <!-- AFFICHAGE ERREUR DE MOT DE PASSE -->
+            <p class="erreurMDP"><?php echo $erreur ?></p>
+
             <!-- NOM UTILISATEUR -->
             <div class="mb-3">
                 <label>Entrez un nom *</label>
@@ -34,7 +37,7 @@ if (empty($_SESSION)) {
             <!-- TELEPHONE UTILISATEUR -->
             <div class="mb-3">
                 <label for="telephone">Entrez un numéro de téléphone *</label>
-                <input type="text" class="form-control" name="titre" id="telephone" placeholder="ex. 0606060606">
+                <input type="text" class="form-control" name="telephone" id="telephone" placeholder="ex. 0606060606">
             </div>
 
             <!-- EMAIL UTILISATEUR -->

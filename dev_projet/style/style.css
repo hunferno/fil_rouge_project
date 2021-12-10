@@ -13,7 +13,7 @@
 /* BODY */
 body {
   font-family: "Roboto", sans-serif !important;
-  background: center / cover no-repeat
+  background: center / cover no-repeat fixed
     url("https://www.justgeek.fr/wp-content/uploads/2021/06/windows-11-fond-ecran-wallpaper-3-scaled.jpg");
 }
 

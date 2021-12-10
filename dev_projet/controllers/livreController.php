@@ -52,7 +52,7 @@ switch ($action) {
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/livreModel.php';
         //UTILISATION DE LE FONCTION POUR SUPPRIMER LIVRE
-        supprimerLivre($_GET['id']);
+        supprimerUnLivre($_GET['id']);
         //UTILISATION DE LE FONCTION POUR AFFICHER LES LIVRES
         $dataFromDB = afficherTousLesLivres();
         //AFFICHER LA PAGE DES LIVRES

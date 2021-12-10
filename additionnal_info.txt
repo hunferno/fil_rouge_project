@@ -1,0 +1,6 @@
+A RAJOUTER AU MCD
+
+-------------USER-----------
+-1 date de fin d'abonnement = date d'inscription + 365jours
+-2 photo de profile user
+-3 
