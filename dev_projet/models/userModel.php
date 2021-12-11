@@ -146,8 +146,11 @@ function supprimerUnUser($uniqueId, $categorie, $imagePath)
     }
 }
 
-function modifierUnUser($id_user)
+function modifierUnUser($id_user, $categorie, $path)
 {
+    //UTILISATION DE LA VARIABLE ERREUR
+    global $erreur;
+
     //RECUPERATION DES DONNEES DU FORMULAIRE
     $user = [
         'nom' => filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_SPECIAL_CHARS),
@@ -163,6 +166,27 @@ function modifierUnUser($id_user)
 
     try {
         modifierUser($id_user, $user);
+        //TESTER SI ERREUR
+        if (!$erreur) {
+            //TESTER SI LA CATEGORIE A CHANGÉE
+            if ($categorie !== $user['categorie']) {
+                //TESTER L'ANCIENNE CATEGORIE
+                switch ($categorie) {
+                    case '2':
+                        //DEPLACER PHOTO DANS LE BONS DOSSIER
+                        $ancien_chemin = "asset/images/users/eleves/$path";
+                        $new_chemin = "asset/images/users/profs/$path";
+                        rename($ancien_chemin, $new_chemin);
+                        break;
+                    case '3':
+                        //DEPLACER PHOTO DANS LE BONS DOSSIER
+                        $ancien_chemin = "asset/images/users/profs/$path";
+                        $new_chemin = "asset/images/users/eleves/$path";
+                        rename($ancien_chemin, $new_chemin);
+                        break;
+                }
+            }
+        }
     } catch (Exception $err) {
         var_dump($err);
         exit();

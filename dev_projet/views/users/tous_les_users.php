@@ -12,7 +12,7 @@ if (empty($_SESSION)) {
     <div class="dashboard_ajouterLivre">
         <!-- Bar de recherche Bootstrap-->
         <div class="input-group rounded">
-            <input type="search" class="form-control rounded" placeholder="Rechercher un livre" aria-label="Search" aria-describedby="search-addon" />
+            <input type="search" class="form-control rounded" placeholder="Rechercher un abonné" aria-label="Search" aria-describedby="search-addon" />
             <span class="input-group-text border-0" id="search-addon">
                 <i class="fas fa-search"></i>
             </span>
@@ -47,7 +47,7 @@ if (empty($_SESSION)) {
                     <td>$value[nom_categorie_user]</td>
                     <td>$value[expiration_abo_user]</td>
 
-                    <td><a href='index.php?entite=user&action=FormModifUser&nom=$value[nom_user]&prenom=$value[prenom_user]&id=$value[uniqueId_user]'><i class='far fa-edit'></i></a> 
+                    <td><a href='index.php?entite=user&action=FormModifUser&nom=$value[nom_user]&prenom=$value[prenom_user]&id=$value[uniqueId_user]&categorie=$value[id_categorie_user]&path=$value[photo_profile_user]'><i class='far fa-edit'></i></a> 
                     <a href='index.php?entite=user&action=supprimerUser&id=$value[uniqueId_user]&imagePath=$value[photo_profile_user]&categorie=$value[nom_categorie_user]'>
                     <i class='far fa-trash-alt'></i></a></td>
                     </tr>

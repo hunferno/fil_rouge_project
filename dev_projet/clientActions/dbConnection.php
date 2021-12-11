@@ -148,7 +148,7 @@ function modifierUser($id_user, $user)
     SET nom_user=:nom_user,
     prenom_user=:prenom_user, 
     password_user=:password_user, 
-    id_categorie_user=:id_categorie_user, 
+    id_categorie_user=:id_categorie_user
     WHERE uniqueId_user=\'' . $id_user . '\';';
 
     //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION

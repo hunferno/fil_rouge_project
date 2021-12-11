@@ -10,7 +10,7 @@ if (empty($_SESSION)) {
     require 'views/composants/aside.php';
     ?>
     <section class="dashboard_ajouterLivre">
-        <form action="index.php?entite=user&action=modifier_user&id=<?php echo $id_user ?>" method="post" enctype="multipart/form-data">
+        <form action="index.php?entite=user&action=modifier_user&id=<?php echo $id_user ?>&nom=<?php echo $nom ?>&prenom=<?php echo $prenom ?>&categorie=<?php echo $categorie ?>&path=<?php echo $path ?>" method="post" enctype="multipart/form-data">
             <h2>Modifier votre profile <?php echo $prenom . " " . $nom ?></h2>
 
             <!-- AFFICHAGE ERREUR DE MOT DE PASSE -->
@@ -25,7 +25,7 @@ if (empty($_SESSION)) {
             <!-- PRENOM UTILISATEUR -->
             <div class="mb-3">
                 <label for="prenom">Modifier le prénom *</label>
-                <input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $prenom ?> placeholder=" ex. Jean">
+                <input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $prenom ?>" placeholder=" ex. Jean">
             </div>
 
             <!-- MDP UTILISATEUR -->

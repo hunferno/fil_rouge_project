@@ -24,11 +24,13 @@ switch ($action) {
 
     case 'FormModifUser':
         //CREATION DES VARIABLES UTILES A LA PAGE
-        $nom = $_GET['nom_user'];
-        $prenom = $_GET['prenom_user'];
-        $id_user = $_GET['uniqueId_user'];
+        $nom = $_GET['nom'];
+        $prenom = $_GET['prenom'];
+        $id_user = $_GET['id'];
+        $categorie = $_GET['categorie'];
+        $path = $_GET['path'];
         //UTILISATION DE LE FONCTION POUR DECONNECTER USER
-        $vue = 'views/users/modifer_user';
+        $vue = 'views/users/modifier_user';
         break;
 
     case 'ajouter_user':
@@ -43,10 +45,22 @@ switch ($action) {
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/userModel.php';
         //UTILISATION DE LE FONCTION POUR DECONNECTER USER
-        modifierUnUser($_GET['id']);
-        //RETOUR A LA PAGE TOUS LES USERS
-        $dataFromDB = afficherTousLesUsers();
-        $vue = 'views/users/tous_les_users';
+        modifierUnUser($_GET['id'], $_GET['categorie'], $_GET['path']);
+        //SI LA VARIABLE ERREUR EXISTE
+        if ($erreur) {
+            //CREATION DES VARIABLES UTILES A LA PAGE
+            $nom = $_GET['nom'];
+            $prenom = $_GET['prenom'];
+            $id_user = $_GET['id'];
+            $categorie = $_GET['categorie'];
+            $path = $_GET['path'];
+            //UTILISATION DE LE FONCTION POUR DECONNECTER USER
+            $vue = 'views/users/modifier_user';
+        } else {
+            //RETOUR A LA PAGE TOUS LES USERS
+            $dataFromDB = afficherTousLesUsers();
+            $vue = 'views/users/tous_les_users';
+        }
         break;
 
     case 'afficherTousLesUsers':
