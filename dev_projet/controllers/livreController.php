@@ -38,8 +38,6 @@ switch ($action) {
         require 'models/livreModel.php';
         //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
         $id_livre = $_GET['id'];
-        // var_dump($_GET['id']);
-        // die();
         modifierUnLivre($id_livre);
         //UTILISATION DE LE FONCTION POUR AFFICHER LES LIVRES
         $dataFromDB = afficherTousLesLivres();

@@ -95,4 +95,7 @@ tr {
 .info_user {
   display: none;
 }
+.display_tr {
+  display: table-row;
+}
 /* ------------------FIN PAGE AFFICHAGE TOUS LES USER---------- */

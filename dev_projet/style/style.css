@@ -12,6 +12,7 @@
 
 /* BODY */
 body {
+  overflow-x: hidden;
   font-family: "Roboto", sans-serif !important;
   background: center / cover no-repeat fixed
     url("https://www.justgeek.fr/wp-content/uploads/2021/06/windows-11-fond-ecran-wallpaper-3-scaled.jpg");
@@ -30,7 +31,7 @@ body {
 
 #container {
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -38,6 +39,7 @@ body {
 
 /* HEADER */
 header {
+  padding: 0 40px;
   align-items: center;
   justify-content: space-between;
 }
@@ -73,6 +75,9 @@ main,
 footer {
   display: flex;
   width: 100%;
+}
+main,
+footer {
   padding: 0 20px;
 }
 header,

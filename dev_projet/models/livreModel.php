@@ -48,13 +48,22 @@ function afficherTousLesLivres()
 
 function modifierUnLivre($id_livre)
 {
+    //TRANSFORMER LA CHECKBOX EN BOOLEAN
+    if (isset($_POST['dispo_livre'])) {
+        $disponible = 'Oui';
+    } else {
+        $disponible = 'Non';
+    }
+
+    // $disponible = $_POST['dispo_livre'] ? 'Oui' : 'Non';
+
     $livre = [
         'titre' => $_POST['titre'],
         'id_theme' => $_POST['theme'],
         'id_auteur' => $_POST['auteur'],
         'id_editeur' => $_POST['editeur'],
         'date_parution' => $_POST['date_parution'],
-        'disponible' => $_POST['dispo_livre']
+        'disponible' => $disponible
     ];
 
     try {

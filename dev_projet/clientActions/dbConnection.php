@@ -6,7 +6,7 @@ try {
     $dbConnect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $erreur) {
     //Envoyer une page d'erreur si connexion echouée
-    header('Location:/pages/redirect_erreurDataBase.php');
+    header('Location:views/erreurs/redirect_erreurDataBase.php');
     exit();
 }
 
@@ -236,9 +236,6 @@ function modifierLivre($livre, $id_livre)
     //TRANSFORMER LE TITRE EN MAJUSCULE
     $titre = trim(strtoupper($livre['titre']));
 
-    //TRANSFORMER LA CHECKBOX EN BOOLEAN
-    $checkbox = $livre['disponible'] ? 'Oui' : 'Non';
-
     //FORMATTER ID LIVRE -> TITRE,THEME,AUTEUR,EDITEUR&DATE
     //1-ON SUPPR LES ESPACES ET ON PREND LES 3 PREMIERS CARACTERES
     $formatTitre = substr(str_replace(' ', '', $livre['titre']), 0, 3);
@@ -250,7 +247,7 @@ function modifierLivre($livre, $id_livre)
     //COMPLETER LES DONNEES MANQUANTES A PARTIR DE LA REPONSE AVEC LE BINDPARAM
     $dbResponse->bindParam(':id_livre', $uniqueIdLivre);
     $dbResponse->bindParam(':titre', $titre);
-    $dbResponse->bindParam(':disponible', $checkbox);
+    $dbResponse->bindParam(':disponible', $livre['disponible']);
     $dbResponse->bindParam(':date_parution', $livre['date_parution']);
     $dbResponse->bindParam(':id_theme', $livre['id_theme']);
     $dbResponse->bindParam(':id_auteur', $livre['id_auteur']);

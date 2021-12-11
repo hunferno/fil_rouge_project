@@ -32,7 +32,7 @@ if (empty($_SESSION)) {
                 <?php
                 //EXPLOITER LES DONNEES
                 foreach ($dataFromDB as $value) {
-                    echo "<tr>";
+                    echo "<tr class='main_user'>";
                     switch ($value['nom_categorie_user']) {
                         case 'PROFESSEUR':
                             echo "<td><img class='image_livre' src='asset/images/users/profs/$value[photo_profile_user]'/></td>";
