@@ -62,6 +62,31 @@ aside {
 }
 
 /* ----------------PAGE AJOUTER LIVRE--------------- */
+.selection {
+  display: flex;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  color: rgb(51, 228, 228);
+  font-style: italic;
+  font-weight: 600;
+}
+.selection label {
+  min-width: 200px;
+}
+
+.addSelect {
+  display: flex;
+}
+.addSelect .far {
+  cursor: pointer;
+  margin-left: 8px;
+}
+/* LE MOINS EST CACHE PAR DEFAUT */
+.addSelect .fa-minus-square {
+  display: none;
+}
+
 .dashboard_ajouterLivre {
   color: antiquewhite;
   margin: 0 5rem;

@@ -16,46 +16,71 @@ if (empty($_SESSION)) {
                 <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre : ex. La fille de papier *">
             </div>
 
-            <select class="mb-3 form-select" name="theme" required>
-                <option selected disabled>Selectionner un thème *</option>
-                <option value="1">amour</option>
-                <option value="2">aventure</option>
-                <option value="3">policier</option>
-                <option value="4">fantastique</option>
-                <option value="5">science-fiction</option>
-                <option value="6">fantasy</option>
-                <option value="7">animaux</option>
-                <option value="8">nature</option>
-                <option value="9">histoire</option>
-                <option value="10">sport</option>
-            </select>
+            <div>
+                <div class="addSelect">
+                    <select class="mb-3 form-select" name="theme" required>
+                        <option selected disabled>Selectionner un thème *</option>
+                        <?php
+                        foreach ($allThemes as $key => $theme) {
+                            echo "<option value=$theme[id_theme]>$theme[nom_theme]";
+                        }
+                        ?>
+                    </select>
+                    <i class="far fa-plus-square fa-2x"></i>
+                    <i class="far fa-minus-square fa-2x"></i>
+                </div>
+                <div class="selection mb-3" action="" method="post">
+                    <?php echo $erreur ?>
+                    <label for="newTheme">Ajouter un nouveau thème</label>
+                    <input type="text" class="form-control" name="newTheme" id="newTheme">
+                    <button class="btn btn-primary" type="submit" name="action" value="theme">Ajouter Thème</button>
+                </div>
 
-            <select class="mb-3 form-select" name="auteur" required>
-                <option selected disabled>Selectionner un auteur *</option>
-                <option value="1">Honoré de Balzac</option>
-                <option value="2">Molière</option>
-                <option value="3">Albert Camus</option>
-                <option value="4">Guillaume Musso</option>
-                <option value="5">Voltaire</option>
-                <option value="6">Victor Hugo</option>
-                <option value="7">Alfred de Musset</option>
-                <option value="8">Jules Verne</option>
-                <option value="9">Emile zola</option>
-                <option value="10">Guy de Maupassant</option>
-                <option value="11">Marc Levy</option>
-            </select>
+            </div>
 
-            <select class="mb-3 form-select" name="editeur" required>
-                <option selected disabled>Selectionner une maison d'édition *</option>
-                <option value="1">Gallimard</option>
-                <option value="2">Flammarion</option>
-                <option value="3">Milan</option>
-                <option value="4">Baudelaire</option>
-                <option value="5">Hachette</option>
-                <option value="6">Le léopard masqué</option>
-                <option value="7">Allary</option>
-                <option value="8">Julliard</option>
-            </select>
+            <div>
+                <div class="addSelect">
+                    <select class="mb-3 form-select" name="auteur" required>
+                        <option selected disabled>Selectionner un auteur *</option>
+                        <?php
+                        foreach ($allAuteurs as $key => $auteur) {
+                            echo "<option value=$auteur[id_auteur]>$auteur[nom_auteur]";
+                        }
+                        ?>
+                    </select>
+                    <i class="far fa-plus-square fa-2x"></i>
+                    <i class="far fa-minus-square fa-2x"></i>
+                </div>
+                <div class="selection mb-3" action="" method="post">
+                    <?php echo $erreur ?>
+                    <label for="newAuteur">Ajouter un nouvel auteur</label>
+                    <input type="text" class="form-control" name="newAuteur" id="newAuteur">
+                    <button class="btn btn-primary" type="submit" name="action" value="auteur">Ajouter Auteur</button>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="addSelect">
+                    <select class="mb-3 form-select" name="editeur" required>
+                        <option selected disabled>Selectionner une maison d'édition *</option>
+                        <?php
+                        foreach ($allEditeurs as $key => $editeur) {
+                            echo "<option value=$editeur[id_editeur]>$editeur[raison_sociale_editeur]";
+                        }
+                        ?>
+                    </select>
+                    <i class="far fa-plus-square fa-2x"></i>
+                    <i class="far fa-minus-square fa-2x"></i>
+                </div>
+                <div class="selection mb-3" action="" method="post">
+                    <?php echo $erreur ?>
+                    <label for="newEditeur">Ajouter un nouvel éditeur</label>
+                    <input type="text" class="form-control" name="newEditeur" id="newEditeur">
+                    <button class="btn btn-primary" type="submit" name="action" value="editeur">Ajouter Éditeur</button>
+
+                </div>
+            </div>
 
             <div class="mb-3" style='display:flex; flex-direction:column'>
                 <label for="file" class="form-label">Selectionner une image</label>
@@ -72,7 +97,7 @@ if (empty($_SESSION)) {
                 <label class="form-check-label" for="dispo_livre">Disponible immédiatement</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Enregistrer livre</button>
+            <button type="submit" class="btn btn-primary" name="action" value="livre">Enregistrer livre</button>
         </form>
         </form>
     </section>

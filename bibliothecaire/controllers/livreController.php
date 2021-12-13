@@ -3,6 +3,14 @@
 //AGIR EN FONCTION DES ACTIONS
 switch ($action) {
     case 'FormAjoutLivre':
+        //APPEL DE LA DAO
+        require 'clientActions/dbConnection.php';
+
+        //RECUPERATION DIRECT DES DONNEE VIA DAO 
+        $allAuteurs = getAuteurs();
+        $allEditeurs = getEditeurs();
+        $allThemes = getThemes();
+
         //APPEL DE LA VUE
         $vue = 'livres/ajouter_livre';
         break;
@@ -20,8 +28,12 @@ switch ($action) {
         require 'models/livreModel.php';
         //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
         ajouterUnLivre();
+        //RECUPERATION DIRECT DES DONNEE VIA DAO 
+        $allAuteurs = getAuteurs();
+        $allEditeurs = getEditeurs();
+        $allThemes = getThemes();
         //AFFICHER LA VUE AJOUTER_LIVRE
-        $vue = 'views/livres/ajouter_livre';
+        $vue = 'livres/ajouter_livre';
         break;
 
     case 'afficherTousLesLivres':
@@ -30,7 +42,7 @@ switch ($action) {
         //UTILISATION DE LE FONCTION POUR AFFICHER LES LIVRES
         $dataFromDB = afficherTousLesLivres();
         //AFFICHER LA PAGE DES LIVRES
-        $vue = 'views/livres/tous_les_livres';
+        $vue = 'livres/tous_les_livres';
         break;
 
     case 'modifierLivreDb':
@@ -42,7 +54,7 @@ switch ($action) {
         //UTILISATION DE LE FONCTION POUR AFFICHER LES LIVRES
         $dataFromDB = afficherTousLesLivres();
         //AFFICHER LA PAGE DES LIVRES
-        $vue = 'views/livres/tous_les_livres';
+        $vue = 'livres/tous_les_livres';
         break;
 
     case 'supprimerLivre':
@@ -53,7 +65,7 @@ switch ($action) {
         //UTILISATION DE LE FONCTION POUR AFFICHER LES LIVRES
         $dataFromDB = afficherTousLesLivres();
         //AFFICHER LA PAGE DES LIVRES
-        $vue = 'views/livres/tous_les_livres';
+        $vue = 'livres/tous_les_livres';
         break;
 
     default:
