@@ -1,12 +1,20 @@
 <?php
 
-//APPEL DE LA DAO POUR LES REQUETES SQL
-require 'clientActions/dbConnection.php';
+//APPEL DE LA CLASS DAOLIVRE POUR LES REQUETES SQL
+require 'dbActions/DaoLivre.php';
+//APPEL DE LA CLASS DAOLIVRE POUR LES REQUETES SQL
+require 'dbActions/DaoTheAutEdit.php';
 
 function ajouterUnLivre()
 {
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoLivre = new DaoLivre();
+    //CREATION D'UNE CLASS DAO THEME AUTEUR EDITEUR
+    $daoTheAutEdit = new DaoTheAutEdit();
+
     //VARIABLES GLOBALES
     global $erreur;
+
     //FAIRE DES ACTIONS EN FONCTION DU BTN VALIDÉ
     switch ($_POST['action']) {
         case 'livre':
@@ -30,7 +38,7 @@ function ajouterUnLivre()
 
             try {
                 //APPEL DE LA FONCTION ajouterLivre
-                ajouterLivre($livre);
+                $dbDaoLivre->ajouterLivre($livre);
                 //DEPLACER L'IMAGE DANS LE DOSSIER DES IMAGES LIVRES
                 move_uploaded_file($_FILES['image_livre']['tmp_name'], 'asset/images/livres/' . $nom_image_livre);
             } catch (Exception $erreur) {
@@ -45,7 +53,7 @@ function ajouterUnLivre()
                         Le champs ne peut être vide!</div>';
             } else {
                 $theme = filter_input(INPUT_POST, 'newTheme');
-                addTheme($theme);
+                $daoTheAutEdit->addTheme($theme);
             }
             break;
 
@@ -55,7 +63,7 @@ function ajouterUnLivre()
                         Le champs ne peut être vide!</div>';
             } else {
                 $auteur = filter_input(INPUT_POST, 'newAuteur');
-                addAuteur($auteur);
+                $daoTheAutEdit->addAuteur($auteur);
             }
             break;
 
@@ -65,7 +73,7 @@ function ajouterUnLivre()
                         Le champs ne peut être vide!</div>';
             } else {
                 $editeur = filter_input(INPUT_POST, 'newEditeur');
-                addEditeur($editeur);
+                $daoTheAutEdit->addEditeur($editeur);
             }
             break;
     }
@@ -73,10 +81,11 @@ function ajouterUnLivre()
 
 function afficherTousLesLivres()
 {
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoLivre = new DaoLivre();
+
     try {
-        //REQUETE SQL POUR OBTENIR TOUS LES LIVRES
-        $dataFromDB = afficherLivres();
-        return $dataFromDB;
+        return $dbDaoLivre->afficherLivres();
     } catch (Exception $erreur) {
         var_dump($erreur->getMessage());
         exit();
@@ -85,6 +94,10 @@ function afficherTousLesLivres()
 
 function modifierUnLivre($id_livre)
 {
+
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoLivre = new DaoLivre();
+
     //TRANSFORMER LA CHECKBOX EN BOOLEAN
     if (isset($_POST['dispo_livre'])) {
         $disponible = 'Oui';
@@ -105,7 +118,7 @@ function modifierUnLivre($id_livre)
 
     try {
         //APPEL DE LA FONCTION ajouterLivre
-        modifierLivre($livre, $id_livre);
+        $dbDaoLivre->modifierLivre($livre, $id_livre);
     } catch (Exception $erreur) {
         var_dump($erreur->getMessage());
         exit();
@@ -114,8 +127,12 @@ function modifierUnLivre($id_livre)
 
 function supprimerUnLivre($id_livre, $imagePath)
 {
+
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoLivre = new DaoLivre();
+
     try {
-        supprimerLivre($id_livre);
+        $dbDaoLivre->supprimerLivre($id_livre);
         //SUPPRIMER IMAGE STOCKEE
         if ($imagePath !== 'empty_book.png') {
             unlink('asset/images/livres/' . $imagePath);

@@ -3,13 +3,16 @@
 //AGIR EN FONCTION DES ACTIONS
 switch ($action) {
     case 'FormAjoutLivre':
-        //APPEL DE LA DAO
-        require 'clientActions/dbConnection.php';
+        //APPEL DE LA CLASS DAO THEME AUTEUR EDITEUR
+        require 'dbActions/DaoTheAutEdit.php';
+
+        //CREATION DE LA NOUVELLE CLASS
+        $daoTheAutEdit = new DaoTheAutEdit();
 
         //RECUPERATION DIRECT DES DONNEE VIA DAO 
-        $allAuteurs = getAuteurs();
-        $allEditeurs = getEditeurs();
-        $allThemes = getThemes();
+        $allAuteurs = $daoTheAutEdit->getAuteurs();
+        $allEditeurs = $daoTheAutEdit->getEditeurs();
+        $allThemes = $daoTheAutEdit->getThemes();
 
         //APPEL DE LA VUE
         $vue = 'livres/ajouter_livre';

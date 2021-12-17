@@ -1,10 +1,14 @@
 <?php
 
-//APPEL DE LA DAO POUR LES REQUETES SQL
-require 'clientActions/dbConnection.php';
+//APPEL DE LA CLASS DAOLIVRE POUR LES REQUETES SQL
+require 'dbActions/DaoUser.php';
 
 function connexion()
 {
+
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoUser = new DaoUser();
+
     //UTLISATION DES VARIABLES GLOBALES
     global $vue;
     global $erreur;
@@ -19,7 +23,7 @@ function connexion()
     try {
 
         //AFFECTATION DU RETURN DE LA FONCTION A UNE VARIABLE
-        $dataFromResponse = userConnection($client);
+        $dataFromResponse = $dbDaoUser->userConnection($client);
         //VERIFICATION SI USER EST ADMIN
         if ($dataFromResponse['id_categorie_user'] === "1") {
             $email = $dataFromResponse['email_user'];
@@ -64,6 +68,9 @@ function deconnexion($session)
 
 function ajouterUnUser()
 {
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoUser = new DaoUser();
+
     global $erreur;
 
     //TEST POUR IMAGE A ENVOYER
@@ -96,8 +103,8 @@ function ajouterUnUser()
     ];
 
     try {
-        // APPEL DE LA FONCTION ajouterUser
-        ajouterUser($user);
+        // APPEL DE LA FONCTION ajouterUser VIA LA CLASS
+        $dbDaoUser->ajouterUser($user);
         //DEPLACER L'IMAGE DANS LE BON DOSSIER DES USERS
         switch ($_POST['categorie']) {
             case '2':
@@ -115,9 +122,12 @@ function ajouterUnUser()
 
 function afficherTousLesUsers()
 {
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoUser = new DaoUser();
+
     try {
         //REQUETE SQL POUR OBTENIR TOUS LES LIVRES
-        $dataFromDB = afficherUsers();
+        $dataFromDB = $dbDaoUser->afficherUsers();
         return $dataFromDB;
     } catch (Exception $erreur) {
         var_dump($erreur->getMessage());
@@ -127,8 +137,11 @@ function afficherTousLesUsers()
 
 function supprimerUnUser($uniqueId, $categorie, $imagePath)
 {
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoUser = new DaoUser();
+
     try {
-        supprimerUser($uniqueId);
+        $dbDaoUser->supprimerUser($uniqueId);
         //SUPPRIMER IMAGE STOCKEE
         if ($imagePath !== 'empty_user.png') {
             switch ($categorie) {
@@ -148,6 +161,9 @@ function supprimerUnUser($uniqueId, $categorie, $imagePath)
 
 function modifierUnUser($id_user, $categorie, $path)
 {
+    //CREATION D'UNE CLASS DAOLIVRE
+    $dbDaoUser = new DaoUser();
+
     //UTILISATION DE LA VARIABLE ERREUR
     global $erreur;
 
@@ -165,7 +181,7 @@ function modifierUnUser($id_user, $categorie, $path)
     ];
 
     try {
-        modifierUser($id_user, $user);
+        $dbDaoUser->modifierUser($id_user, $user);
         //TESTER SI ERREUR
         if (!$erreur) {
             //TESTER SI LA CATEGORIE A CHANGÉE
