@@ -2,17 +2,14 @@
 
 //APPEL DE LA CLASS DAOLIVRE POUR LES REQUETES SQL
 require 'dbActions/DaoLivre.php';
-//APPEL DE LA CLASS DAOLIVRE POUR LES REQUETES SQL
-require 'dbActions/DaoTheAutEdit.php';
+
+//CREATION D'UNE CLASS DAOLIVRE
+$dbDaoLivre = new DaoLivre();
 
 function ajouterUnLivre()
 {
-    //CREATION D'UNE CLASS DAOLIVRE
-    $dbDaoLivre = new DaoLivre();
-    //CREATION D'UNE CLASS DAO THEME AUTEUR EDITEUR
-    $daoTheAutEdit = new DaoTheAutEdit();
-
     //VARIABLES GLOBALES
+    global $dbDaoLivre;
     global $erreur;
 
     //FAIRE DES ACTIONS EN FONCTION DU BTN VALIDÉ
@@ -47,42 +44,41 @@ function ajouterUnLivre()
             }
             break;
 
-        case 'theme':
-            if (empty($_POST['newTheme'])) {
-                $erreur = '<div class="alert alert-danger" role="alert">
-                        Le champs ne peut être vide!</div>';
-            } else {
-                $theme = filter_input(INPUT_POST, 'newTheme');
-                $daoTheAutEdit->addTheme($theme);
-            }
-            break;
+            // case 'theme':
+            //     if (empty($_POST['newTheme'])) {
+            //         $erreur = '<div class="alert alert-danger" role="alert">
+            //                 Le champs ne peut être vide!</div>';
+            //     } else {
+            //         $theme = filter_input(INPUT_POST, 'newTheme');
+            //         $daoTheAutEdit->addTheme($theme);
+            //     }
+            //     break;
 
-        case 'auteur':
-            if (empty($_POST['newAuteur'])) {
-                $erreur = '<div class="alert alert-danger" role="alert">
-                        Le champs ne peut être vide!</div>';
-            } else {
-                $auteur = filter_input(INPUT_POST, 'newAuteur');
-                $daoTheAutEdit->addAuteur($auteur);
-            }
-            break;
+            // case 'auteur':
+            //     if (empty($_POST['newAuteur'])) {
+            //         $erreur = '<div class="alert alert-danger" role="alert">
+            //                 Le champs ne peut être vide!</div>';
+            //     } else {
+            //         $auteur = filter_input(INPUT_POST, 'newAuteur');
+            //         $daoTheAutEdit->addAuteur($auteur);
+            //     }
+            //     break;
 
-        case 'editeur':
-            if (empty($_POST['newEditeur'])) {
-                $erreur = '<div class="alert alert-danger" role="alert">
-                        Le champs ne peut être vide!</div>';
-            } else {
-                $editeur = filter_input(INPUT_POST, 'newEditeur');
-                $daoTheAutEdit->addEditeur($editeur);
-            }
-            break;
+            // case 'editeur':
+            //     if (empty($_POST['newEditeur'])) {
+            //         $erreur = '<div class="alert alert-danger" role="alert">
+            //                 Le champs ne peut être vide!</div>';
+            //     } else {
+            //         $editeur = filter_input(INPUT_POST, 'newEditeur');
+            //         $daoTheAutEdit->addEditeur($editeur);
+            //     }
+            //     break;
     }
 }
 
 function afficherTousLesLivres()
 {
-    //CREATION D'UNE CLASS DAOLIVRE
-    $dbDaoLivre = new DaoLivre();
+    global $dbDaoLivre;
 
     try {
         return $dbDaoLivre->afficherLivres();
@@ -95,8 +91,7 @@ function afficherTousLesLivres()
 function modifierUnLivre($id_livre)
 {
 
-    //CREATION D'UNE CLASS DAOLIVRE
-    $dbDaoLivre = new DaoLivre();
+    global $dbDaoLivre;
 
     //TRANSFORMER LA CHECKBOX EN BOOLEAN
     if (isset($_POST['dispo_livre'])) {
@@ -128,8 +123,7 @@ function modifierUnLivre($id_livre)
 function supprimerUnLivre($id_livre, $imagePath)
 {
 
-    //CREATION D'UNE CLASS DAOLIVRE
-    $dbDaoLivre = new DaoLivre();
+    global $dbDaoLivre;
 
     try {
         $dbDaoLivre->supprimerLivre($id_livre);

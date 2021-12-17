@@ -3,16 +3,13 @@
 //AGIR EN FONCTION DES ACTIONS
 switch ($action) {
     case 'FormAjoutLivre':
-        //APPEL DE LA CLASS DAO THEME AUTEUR EDITEUR
-        require 'dbActions/DaoTheAutEdit.php';
-
-        //CREATION DE LA NOUVELLE CLASS
-        $daoTheAutEdit = new DaoTheAutEdit();
+        //APPEL DU MODEL THEME AUTEUR EDITEUR
+        require 'models/theAutEditModel.php';
 
         //RECUPERATION DIRECT DES DONNEE VIA DAO 
-        $allAuteurs = $daoTheAutEdit->getAuteurs();
-        $allEditeurs = $daoTheAutEdit->getEditeurs();
-        $allThemes = $daoTheAutEdit->getThemes();
+        $allAuteurs = getAllAuteurs();
+        $allEditeurs = getAllEditeurs();
+        $allThemes = getAllThemes();
 
         //APPEL DE LA VUE
         $vue = 'livres/ajouter_livre';
@@ -27,14 +24,23 @@ switch ($action) {
         break;
 
     case 'ajoutLivreDb':
-        //APPEL DU MODEL POUR TRAITEMENT
-        require 'models/livreModel.php';
-        //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
-        ajouterUnLivre();
-        //RECUPERATION DIRECT DES DONNEE VIA DAO 
-        $allAuteurs = getAuteurs();
-        $allEditeurs = getEditeurs();
-        $allThemes = getThemes();
+        if ($_POST['action'] === 'livre') {
+            //APPEL DU MODEL POUR TRAITEMENT
+            require 'models/livreModel.php';
+            //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
+            ajouterUnLivre();
+        } else {
+            //APPEL DU MODEL POUR TRAITEMENT
+            require 'models/theAutEditModel.php';
+            //UTILISATION DE LE FONCTION POUR AJOUTER LIVRE
+            ajouterTheAutEdit();
+
+            //RECUPERATION DIRECT DES DONNEE VIA DAO 
+            $allAuteurs = getAllAuteurs();
+            $allEditeurs = getAllEditeurs();
+            $allThemes = getAllThemes();
+        }
+
         //AFFICHER LA VUE AJOUTER_LIVRE
         $vue = 'livres/ajouter_livre';
         break;
