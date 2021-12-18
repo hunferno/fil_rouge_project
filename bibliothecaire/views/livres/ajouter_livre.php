@@ -21,7 +21,7 @@ if (empty($_SESSION)) {
                     <select class="mb-3 form-select" name="theme" required>
                         <option selected disabled>Selectionner un thème *</option>
                         <?php
-                        foreach ($allThemes as $key => $theme) {
+                        foreach ($allThemes as $theme) {
                             echo "<option value=$theme[id_theme]>$theme[nom_theme]";
                         }
                         ?>
@@ -43,7 +43,7 @@ if (empty($_SESSION)) {
                     <select class="mb-3 form-select" name="auteur" required>
                         <option selected disabled>Selectionner un auteur *</option>
                         <?php
-                        foreach ($allAuteurs as $key => $auteur) {
+                        foreach ($allAuteurs as $auteur) {
                             echo "<option value=$auteur[id_auteur]>$auteur[nom_auteur]";
                         }
                         ?>
@@ -65,7 +65,7 @@ if (empty($_SESSION)) {
                     <select class="mb-3 form-select" name="editeur" required>
                         <option selected disabled>Selectionner une maison d'édition *</option>
                         <?php
-                        foreach ($allEditeurs as $key => $editeur) {
+                        foreach ($allEditeurs as $editeur) {
                             echo "<option value=$editeur[id_editeur]>$editeur[raison_sociale_editeur]";
                         }
                         ?>
@@ -89,7 +89,7 @@ if (empty($_SESSION)) {
 
             <div class="mb-3">
                 <label for="date" class="form-label">Date de parution *</label>
-                <input type="date" name="date_parution" id="date">
+                <input type="date" name="date_parution" id="date" required>
             </div>
 
             <div class="mb-3 form-check">

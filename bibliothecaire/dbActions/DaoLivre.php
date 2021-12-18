@@ -4,12 +4,8 @@ require 'Dao.php';
 
 class DaoLivre extends Dao
 {
-
     function ajouterLivre($livre)
     {
-        //APPEL DE LA VARIABLE GLOBALE
-        // global $dbConnect;
-
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = 'INSERT INTO livre VALUES (:id_livre, :titre, :disponible, :date_parution, :photo_livre, :id_theme, :id_auteur, :id_editeur)';
         //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION

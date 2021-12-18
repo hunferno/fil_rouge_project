@@ -19,6 +19,15 @@ switch ($action) {
         //CREATION DES VARIABLE UTILES A LA PAGE
         $titre_livre = $_GET["titre"];
         $id_livre = $_GET['id'];
+
+        //APPEL DU MODEL THEME AUTEUR EDITEUR
+        require 'models/theAutEditModel.php';
+
+        //RECUPERATION DIRECT DES DONNEE VIA DAO 
+        $allAuteurs = getAllAuteurs();
+        $allEditeurs = getAllEditeurs();
+        $allThemes = getAllThemes();
+
         //APPEL DE LA VUE
         $vue = 'livres/modifier_livre';
         break;

@@ -6,8 +6,14 @@ switch ($action) {
     case 'connexion':
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/userModel.php';
-        //UTILISATION DE LE FONCTION POUR CONNECTER USER
-        connexion();
+        try {
+            //UTILISATION DE LE FONCTION POUR CONNECTER USER
+            connexion();
+        } catch (Exception $err) {
+            //Boite alert SI EMAIL INEXISTANT
+            $erreur = '<div class="alert alert-danger" role="alert">' . $err->getMessage() . '</div>';
+            $vue = 'connexionMain';
+        }
         break;
 
     case 'deconnexion':
@@ -36,16 +42,27 @@ switch ($action) {
     case 'ajouter_user':
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/userModel.php';
-        //UTILISATION DE LE FONCTION POUR AJOUTER USER
-        ajouterUnUser();
+
+        try {
+            //UTILISATION DE LE FONCTION POUR AJOUTER USER
+            ajouterUnUser();
+        } catch (Exception $err) {
+            $erreur = $err->getMessage();
+        }
         $vue = 'views/users/ajouter_user';
         break;
 
     case 'modifier_user':
         //APPEL DU MODEL POUR TRAITEMENT
         require 'models/userModel.php';
-        //UTILISATION DE LE FONCTION POUR DECONNECTER USER
-        modifierUnUser($_GET['id'], $_GET['categorie'], $_GET['path']);
+
+        try {
+            //UTILISATION DE LE FONCTION POUR DECONNECTER USER
+            modifierUnUser($_GET['id'], $_GET['categorie'], $_GET['path']);
+        } catch (Exception $err) {
+            $erreur = $err->getMessage();
+        }
+
         //SI LA VARIABLE ERREUR EXISTE
         if ($erreur) {
             //CREATION DES VARIABLES UTILES A LA PAGE

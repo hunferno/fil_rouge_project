@@ -6,9 +6,6 @@ class DaoUser extends Dao
 {
     public function userConnection($client)
     {
-        //APPEL DE LA VARIABLE GLOBALE
-        // global $dbConnect;
-
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = 'SELECT * FROM user WHERE email_user=:email';
         //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
@@ -29,10 +26,6 @@ class DaoUser extends Dao
 
     public function ajouterUser($user)
     {
-        //BESOIN DE LA CONNEXION A LA BASE
-        // global $dbConnect;
-        global $erreur;
-
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = 'INSERT INTO user VALUES (:uniqueId_user, :nom_user, :prenom_user, :adresse_user, :telephone_user, :email_user, :password_user, :date_inscription_user, :photo_user, :expiration_abonnement, :id_categorie_user)';
         //REPONSE PARTIELLE DE LA BD A PARTIR DE LA CONNECTION
@@ -95,16 +88,13 @@ class DaoUser extends Dao
             //EXECUTER L'INSTRUCTION FINALE
             $dbResponse->execute();
         } else {
-            $erreur = '<div class="alert alert-danger" role="alert">
-        Les mots de passe doivent être identiques</div>';
+            throw new Exception('<div class="alert alert-danger" role="alert">
+        Les mots de passe doivent être identiques</div>');
         }
     }
 
     public function afficherUsers()
     {
-        //VARIABLE GLOBALE DB
-        // global $dbConnect;
-
         //REQUETE A LA BASE DE DONNÉE SANS VARIABLE
         $dbRequest = 'SELECT * FROM user NATURAL JOIN categorie_user WHERE id_categorie_user != 1;';
 
@@ -118,8 +108,6 @@ class DaoUser extends Dao
 
     public function supprimerUser($id_user)
     {
-        // global $dbConnect;
-
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = "DELETE FROM user WHERE uniqueId_user =:id;";
         $prepareRequest = $this->dbConnect->prepare($dbRequest);
@@ -131,10 +119,6 @@ class DaoUser extends Dao
 
     public function modifierUser($id_user, $user)
     {
-        //BESOIN DE LA CONNEXION A LA BASE
-        // global $dbConnect;
-        global $erreur;
-
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = 'UPDATE user 
         SET nom_user=:nom_user,
@@ -163,8 +147,8 @@ class DaoUser extends Dao
             //EXECUTER L'INSTRUCTION FINALE
             $dbResponse->execute();
         } else {
-            $erreur = '<div class="alert alert-danger" role="alert">
-        Les mots de passe doivent être identiques</div>';
+            throw new Exception('<div class="alert alert-danger" role="alert">
+        Les mots de passe doivent être identiques</div>');
         }
     }
 }
