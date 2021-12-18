@@ -1,0 +1,20 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* LES VARIABLES DE COULEURS */
+:root {
+  --primColor: rgb(142, 142, 142);
+  --secondColor: rgb(225, 167, 167);
+}
+/* FIN DES VARIABLES DE COULEUR */
+
+body {
+  padding: 0 10px;
+}
+/* ---------------HEADER------------- */
+/* NAV CONTAINER */
+
+/* FIN NAV CONTAINER */
