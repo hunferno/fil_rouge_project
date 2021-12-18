@@ -10,69 +10,31 @@ function ajouterUnLivre()
 {
     //VARIABLES GLOBALES
     global $dbDaoLivre;
-    global $erreur;
 
     //FAIRE DES ACTIONS EN FONCTION DU BTN VALIDÉ
-    switch ($_POST['action']) {
-        case 'livre':
-            //TEST POUR IMAGE A ENVOYER
-            if (empty($_FILES['image_livre']['name'])) {
-                $nom_image_livre = 'empty_book.png';
-            } else {
-                $info_image = pathinfo($_FILES['image_livre']['name']);
-                $nom_image_livre = uniqid('livre', true) . '.' . $info_image['extension'];
-            }
+    if ($_POST['action'] === 'livre') {
+        //TEST POUR IMAGE A ENVOYER
+        if (empty($_FILES['image_livre']['name'])) {
+            $nom_image_livre = 'empty_book.png';
+        } else {
+            $info_image = pathinfo($_FILES['image_livre']['name']);
+            $nom_image_livre = uniqid('livre', true) . '.' . $info_image['extension'];
+        }
 
-            $livre = [
-                'titre' => filter_input(INPUT_POST, 'titre', FILTER_SANITIZE_SPECIAL_CHARS),
-                'id_theme' => filter_input(INPUT_POST, 'theme'),
-                'id_auteur' => filter_input(INPUT_POST, 'auteur'),
-                'id_editeur' => filter_input(INPUT_POST, 'editeur'),
-                'date_parution' => filter_input(INPUT_POST, 'date_parution'),
-                'disponible' => filter_input(INPUT_POST, 'dispo_livre'),
-                'image_livre' => $nom_image_livre
-            ];
+        $livre = [
+            'titre' => filter_input(INPUT_POST, 'titre', FILTER_SANITIZE_SPECIAL_CHARS),
+            'id_theme' => filter_input(INPUT_POST, 'theme'),
+            'id_auteur' => filter_input(INPUT_POST, 'auteur'),
+            'id_editeur' => filter_input(INPUT_POST, 'editeur'),
+            'date_parution' => filter_input(INPUT_POST, 'date_parution'),
+            'disponible' => filter_input(INPUT_POST, 'dispo_livre'),
+            'image_livre' => $nom_image_livre
+        ];
 
-            try {
-                //APPEL DE LA FONCTION ajouterLivre
-                $dbDaoLivre->ajouterLivre($livre);
-                //DEPLACER L'IMAGE DANS LE DOSSIER DES IMAGES LIVRES
-                move_uploaded_file($_FILES['image_livre']['tmp_name'], 'asset/images/livres/' . $nom_image_livre);
-            } catch (Exception $erreur) {
-                var_dump($erreur->getMessage());
-                exit();
-            }
-            break;
-
-            // case 'theme':
-            //     if (empty($_POST['newTheme'])) {
-            //         $erreur = '<div class="alert alert-danger" role="alert">
-            //                 Le champs ne peut être vide!</div>';
-            //     } else {
-            //         $theme = filter_input(INPUT_POST, 'newTheme');
-            //         $daoTheAutEdit->addTheme($theme);
-            //     }
-            //     break;
-
-            // case 'auteur':
-            //     if (empty($_POST['newAuteur'])) {
-            //         $erreur = '<div class="alert alert-danger" role="alert">
-            //                 Le champs ne peut être vide!</div>';
-            //     } else {
-            //         $auteur = filter_input(INPUT_POST, 'newAuteur');
-            //         $daoTheAutEdit->addAuteur($auteur);
-            //     }
-            //     break;
-
-            // case 'editeur':
-            //     if (empty($_POST['newEditeur'])) {
-            //         $erreur = '<div class="alert alert-danger" role="alert">
-            //                 Le champs ne peut être vide!</div>';
-            //     } else {
-            //         $editeur = filter_input(INPUT_POST, 'newEditeur');
-            //         $daoTheAutEdit->addEditeur($editeur);
-            //     }
-            //     break;
+        //APPEL DE LA FONCTION ajouterLivre
+        $dbDaoLivre->ajouterLivre($livre);
+        //DEPLACER L'IMAGE DANS LE DOSSIER DES IMAGES LIVRES
+        move_uploaded_file($_FILES['image_livre']['tmp_name'], 'asset/images/livres/' . $nom_image_livre);
     }
 }
 
@@ -122,7 +84,6 @@ function modifierUnLivre($id_livre)
 
 function supprimerUnLivre($id_livre, $imagePath)
 {
-
     global $dbDaoLivre;
 
     try {

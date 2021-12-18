@@ -40,9 +40,6 @@ class DaoLivre extends Dao
 
     function modifierLivre($livre, $id_livre)
     {
-        //VARIABLE GLOBALE
-        // global $dbConnect;
-
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = 'UPDATE livre 
         SET id_livre=:id_livre,
@@ -82,9 +79,6 @@ class DaoLivre extends Dao
 
     function afficherLivres()
     {
-        //VARIABLE GLOBALE
-        // global $dbConnect;
-
         //REQUETE A LA BASE DE DONNÉE SANS VARIABLE
         $dbRequest = 'SELECT * FROM livre NATURAL JOIN theme NATURAL JOIN editeur NATURAL JOIN auteur;';
         //REPONSE DE LA BD A PARTIR DE LA CONNECTION
@@ -97,8 +91,6 @@ class DaoLivre extends Dao
 
     function supprimerLivre($id_livre)
     {
-        // global $dbConnect;
-
         //REQUETE A LA BASE DE DONNÉE AVEC VARIABLE
         $dbRequest = "DELETE FROM livre WHERE id_livre =:id;";
         $prepareRequest = $this->dbConnect->prepare($dbRequest);
