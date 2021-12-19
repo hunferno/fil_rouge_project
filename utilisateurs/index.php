@@ -18,8 +18,8 @@
     <header>
         <div class="nav_container">
             <div class="nav_icone">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-times"></i>
+                <i class="fas fa-bars fa-2x"></i>
+                <i class="fas fa-times fa-2x"></i>
             </div>
             <nav>
                 <ul>
@@ -37,12 +37,46 @@
                     </a>
                 </ul>
             </nav>
+            <div class="profile_icone">
+                <i class="fas fa-user-alt fa-2x"></i>
+            </div>
         </div>
-        <div class="profile_icone">
-            <i class="fas fa-user-alt"></i>
+        <div class="logo_container">
+            <a href=""><img src="asset/LOGO.jpg" alt="logo"></a>
+            <h1>Médiathèque du Sud</h1>
+        </div>
+        <!-- Bar de recherche Bootstrap-->
+        <div class="input-group">
+            <input type="search" class="form-control rounded" placeholder="Rechercher un livre" aria-label="Search" aria-describedby="search-addon" />
+            <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search"></i>
+            </span>
         </div>
     </header>
-    <main></main>
+    <main>
+        <section class="main_nouveautes">
+            <div class="nouveautes_title">
+                <h2>Le dernier livre ajouté</h2>
+            </div>
+            <div class="nouveautes_content">
+                <div class="book_title">
+                    <h3>La fille de papier</h3>
+                </div>
+                <div class="book">
+                    <div class="book_info">
+                        <p><span>Auteur : </span>Guillaume MUSSO</p>
+                        <p><span>Date de parution : </span>01/04/2010</p>
+                        <p><span>Description : </span><br>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, aspernatur non. Incidunt ea harum at enim tempore eos labore assumenda.
+                        </p>
+                    </div>
+                    <div class="book_img">
+                        <img src="asset/lafilledepapier.jpg" alt="la fille de papier">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     <footer></footer>
     <script src="javascript/index.js"></script>
 </body>
