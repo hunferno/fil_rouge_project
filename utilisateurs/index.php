@@ -56,7 +56,34 @@
     <main>
         <section class="main_nouveautes">
             <div class="nouveautes_title">
-                <h2>Le dernier livre ajouté</h2>
+                <h2>Le(s) dernier(s) livre(s) ajouté(s)</h2>
+            </div>
+            <div class="nouveautes_content">
+                <!-- SEPARATEUR CERCLE -->
+                <div class="separateur">
+                    <div class="cercle"></div>
+                </div>
+                <!-- FIN SEPARATEUR CERCLE -->
+                <div class="book_title">
+                    <h3>La fille de papier</h3>
+                </div>
+                <div class="book">
+                    <div class="book_info">
+                        <p><span>Auteur : </span>Guillaume MUSSO</p>
+                        <p><span>Date de parution : </span>01/04/2010</p>
+                        <p><span>Description : </span><br>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, aspernatur non. Incidunt ea harum at enim tempore eos labore assumenda.
+                        </p>
+                    </div>
+                    <div class="book_img">
+                        <img src="asset/lafilledepapier.jpg" alt="la fille de papier">
+                    </div>
+                </div>
+                <!-- SEPARATEUR DIAMAND -->
+                <div class="separateur">
+                    <div class="diamand"></div>
+                </div>
+                <!-- FIN SEPARATEUR DIAMAND -->
             </div>
             <div class="nouveautes_content">
                 <div class="book_title">
